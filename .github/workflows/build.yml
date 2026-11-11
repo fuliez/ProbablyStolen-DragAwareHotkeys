@@ -1,0 +1,42 @@
+name: Checks
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  contracts:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '6.0.410'
+      - name: Contract compile and behavioral checks (no proprietary game files)
+        run: dotnet run --project tests/Contracts/Contracts.csproj -c Release
+      - name: Validate source and script syntax
+        shell: pwsh
+        run: ./scripts/check.ps1
+      - name: Check Workshop safeguards offline
+        shell: pwsh
+        run: ./tests/Workshop.ps1
+  # Full builds require legally obtained installed game references. Do not upload them.
+  # A manually started job can use a private self-hosted machine; never run untrusted PRs there.
+  game-build:
+    if: github.event_name == 'workflow_dispatch' && vars.ENABLE_LOCAL_GAME_BUILD == 'true'
+    runs-on: [self-hosted, Windows, probably-stolen]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Build twice and compare DLL hashes
+        shell: pwsh
+        run: |
+          ./build.ps1
+          $first = (Get-FileHash artifacts/Release/drag_aware_hotkeys/*.dll).Hash
+          dotnet clean src/DragAwareHotkeys/DragAwareHotkeys.csproj -c Release
+          if ($LASTEXITCODE -ne 0) { throw 'Clean failed' }
+          ./package.ps1
+          if ($first -ne (Get-FileHash artifacts/Release/drag_aware_hotkeys/*.dll).Hash) { throw 'Non-deterministic DLL' }
+      - uses: actions/upload-artifact@v4
+        with:
+          name: runtime-package
+          path: artifacts/ProbablyStolen-DragAwareHotkeys-*.zip

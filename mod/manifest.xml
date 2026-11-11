@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Manifest>
+  <ID>drag_aware_hotkeys</ID>
+  <Name>Drag-Aware Hotkeys</Name>
+  <Author>ProbablyStolen-DragAwareHotkeys contributors</Author>
+  <ModVersion>0.1.0</ModVersion>
+  <Description>Block Storage Coordinator hotkeys while dragging items. Keep rotation and normal storage shortcuts.</Description>
+  <GameVersions><Version>1.0.0.13</Version></GameVersions>
+  <Prerequisites />
+  <Assemblies><Assembly>ProbablyStolen.DragAwareHotkeys.dll</Assembly></Assemblies>
+  <Capabilities />
+</Manifest>

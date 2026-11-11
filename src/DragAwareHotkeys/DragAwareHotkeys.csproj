@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>ProbablyStolen.DragAwareHotkeys</AssemblyName>
+    <GameManagedDir>$(GameDir)/Probably Stolen_Data/Managed</GameManagedDir>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp"><HintPath>$(GameManagedDir)/Assembly-CSharp.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.CoreModule"><HintPath>$(GameManagedDir)/UnityEngine.CoreModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="0Harmony"><HintPath>$(GameManagedDir)/0Harmony.dll</HintPath><Private>false</Private></Reference>
+  </ItemGroup>
+  <Target Name="RequireGame" BeforeTargets="ResolveReferences">
+    <Error Condition="!Exists('$(GameManagedDir)/Assembly-CSharp.dll')" Text="Set GameDir or use build.ps1 -GameDir /path/to/game. Game assemblies are never downloaded or bundled." />
+  </Target>
+</Project>
