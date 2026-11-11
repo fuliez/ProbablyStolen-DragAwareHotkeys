@@ -8,7 +8,7 @@ Create the open-source project **ProbablyStolen-DragAwareHotkeys** inside `my_mo
 
 ## Completed implementation
 
-- Independent Git repository on main. MIT license, bilingual documentation, SemVer 0.1.3, changelog, Codex rules and CI. GitHub delivery status is recorded below.
+- Independent Git repository on main. MIT license, bilingual documentation, SemVer 0.1.4, changelog, Codex rules and CI. GitHub delivery status is recorded below.
 - Native IMod entry; one automatic Harmony prefix on private static `MachineStorageCoordinator.HandleHotkeys`. Checks public `ItemMouseDragHandler.current.IsDraggingItem` with Unity null comparison. No native cancellation hook exists in inspected build. All actual API evidence is in docs/API-INVESTIGATION.md.
 - Enabled flag, Release lifecycle logs, Debug drag-transition logs, fail-open state-read exception handling with once-per-enable warning. No file/save/network APIs in runtime DLL, empty capabilities.
 - Root build/install/package/publish-workshop PowerShell scripts. Configuration via parameter/env/ignored JSON. Exact DLL + manifest packaging. Upload defaults to preparation; explicit confirmation matching Hidden/Public visibility is required. Preserves/recover Workshop ID, refuses duplicate creation after uncertain upload.
@@ -114,3 +114,12 @@ Read AGENTS.md before editing; do not include local absolute paths or private lo
 - Validation after the fix passed for both explicitly reported values 0.46D and 1.1.0 using the real installed normalizer. Actual-game scanner: 14 methods, no capabilities/hard flags/refusals/errors. Release and Debug builds and 10 behavioral checks per configuration passed. Offline publication checks, README parity and script checks passed; the game-version regression also passed under Windows PowerShell 5.1. Installed 0.1.3 locally while the game was closed; package contains the fixed manifest. Actual restarted menu appearance is still pending owner observation.
 
 - Published https://github.com/fuliez/ProbablyStolen-DragAwareHotkeys/releases/tag/v0.1.3 with runtime ZIP and checksum file. Public Workshop update completed at 2026-11-11T11:26:51Z; anonymous metadata confirms the same item 3837800051 remains public and now describes 0.1.3 / 0.46D. Local installed manifest equals the packaged fixed manifest. Restarted menu observation remains pending; do not claim the owner has already seen the warning disappear.
+
+## Verified release-number correction — 2026-11-11
+
+- The owner reconsidered the 1.1.0 label and supplied screenshots proving Battery Manager 1.1.0 is a ModVersion, with its GameVersions showing 0.46D. Earlier owner-reported 1.1.0 game-version assumptions and rules are now withdrawn. Historical entries above record the mistake, not current compatibility policy.
+- Web research: official Steam news' newest public patch is 100-Rev13 Hotfix; developer APIChanges labels 100-Rev14 / 1.0.0.14 as beta and explains the stale 0.46D runtime value. By the documented numbering rule Rev13 is 1.0.0.13. Direct anonymous SteamCMD app_info_print confirms public build 26525552 and open_beta build 26556045. Local installed build 26525552 and PlayerStore VERSION 100-Rev13 agree. Source links and date are in docs/GAME-VERSIONS.md; raw public queries remain ignored locally.
+- New metadata-only 0.1.4: manifest GameVersions contains ONLY 0.46D for the current old matcher. README/Workshop clearly identify tested public 100-Rev13 / 1.0.0.13 / build 26525552. No claim of beta compatibility. Never reintroduce 1.1.0 based on the older logs above. Runtime input patch unchanged.
+- The screenshot of 0.1.3 confirms the 0.46D entry is green and the prior overall warning is absent. Removing the false 1.1.0 entry also removes its individual red entry. New 0.1.4 post-restart observation remains separate.
+
+- 0.1.4 Release build, actual-game API/scanner, exact normalized 0.46D match, offline publishing and README link/command parity checks passed. Manifest has exactly one GameVersions entry: 0.46D. Installed with game closed and packaged; current user screenshot independently confirms that legacy identifier is green in the installed menu. Old 1.1.0 references above are historical errors, not support claims.

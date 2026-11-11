@@ -1,5 +1,7 @@
 # API investigation — 2026-11-11
 
+> Current correction (0.1.4): the supported public build is 100-Rev13 / 1.0.0.13, build 26525552. The former 1.1.0 game-version assumption is withdrawn; manifest now declares only the actual runtime identifier 0.46D. See [verified sources](GAME-VERSIONS.md). Earlier sections below retain historical investigation context.
+
 ## Evidence and environment
 
 - Installed full-game Steam App ID: **4348910**, build ID **26525552** (read from local Steam app manifest; no account data copied).

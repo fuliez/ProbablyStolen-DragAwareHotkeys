@@ -6,10 +6,13 @@ A lightweight mod for *Probably Stolen*: suppress Storage Coordinator container 
 
 | Item | Status |
 | --- | --- |
-| Mod version | **0.1.3** |
-| Supported game | Official **1.1.0**; also declares this build's internal identifier **0.46D** |
+| Mod version | **0.1.4** |
+| Tested game | Public **100-Rev13 / 1.0.0.13**, build **26525552** |
+| Menu compatibility identifier | **0.46D** (the legacy runtime version retained by this public build) |
 | Acceptance | The owner completed official-game acceptance with no obvious issues reported |
 | Support scope | Official game; third-party mod compatibility is not promised |
+
+See [game-version verification](docs/GAME-VERSIONS.md) for evidence. The earlier game-version claim `1.1.0` confused another mod's version with the game version and is withdrawn. `100-Rev14 / 1.0.0.14` is beta, remains untested and is not claimed as supported.
 
 ## Features
 

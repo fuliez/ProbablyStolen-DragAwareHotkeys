@@ -2,6 +2,8 @@
 
 Automated checks do not launch the game or modify saves. On 2026-11-11 the owner reported completing the official-game manual checks below with no bugs found, on game version **1.1.0**. These are owner-reported results, not agent-observed play tests. Third-party mod compatibility is outside the supported scope. The 0.1.1 update changes compatibility metadata and the display name, with no input logic changes; confirm the updated name/version in the Mods menu after reinstalling and restarting.
 
+> Version-label correction in 0.1.4: past owner-reported game version 1.1.0 was mistaken. The actual tested installation is public 100-Rev13 / 1.0.0.13, build 26525552, reporting 0.46D to the menu. The recorded functional acceptance still refers to this same unchanged installation. See [evidence](GAME-VERSIONS.md).
+
 ## Automated
 
 ```powershell
@@ -98,3 +100,7 @@ Metadata-only maintenance update: exact name is Drag-Aware Hotkeys_解决拖拽�
 
 - After the fix: actual-game normalization checks passed for both 0.46D and 1.1.0; real scanner reported 14 methods, no capabilities, refusals, hard flags or errors. Release/Debug builds and 10 contract checks in each configuration passed. The 0.46D regression also passed under Windows PowerShell 5.1.
 - Fixed 0.1.3 manifest was installed locally with game closed and checked against the packaged manifest. GitHub Release 0.1.3 is published. Existing Workshop item 3837800051 was updated in place, with anonymous metadata confirming public visibility and the 0.1.3 / 0.46D description. Actual menu appearance after restart remains pending.
+
+### 0.1.4 factual compatibility correction
+
+Remove the false 1.1.0 GameVersions entry and keep only 0.46D. Official Steam news, direct SteamCMD public-branch metadata, installed build and game constants establish the tested public release as 100-Rev13 / 1.0.0.13 / build 26525552. Beta 100-Rev14 is explicitly untested. Screenshot of 0.1.3 confirms the 0.46D entry is green and the overall warning is gone; post-restart 0.1.4 appearance remains to be observed.

@@ -6,6 +6,14 @@ All notable changes are recorded here. Versions follow Semantic Versioning.
 
 - No changes yet.
 
+## [0.1.4] - 2026-11-11
+
+### Fixed
+
+- Withdraw the unsupported 1.1.0 game-version claim, which confused another mod's ModVersion with the game version. Declare only the installed public build's actual menu identifier 0.46D.
+- Document verified public release 100-Rev13 (1.0.0.13), build 26525552, using official Steam news, live SteamCMD branch metadata and installed code. Keep beta 100-Rev14 explicitly untested.
+- Correct bilingual README, Workshop text and AI rules; input logic is unchanged.
+
 ## [0.1.3] - 2026-11-11
 
 ### Fixed
