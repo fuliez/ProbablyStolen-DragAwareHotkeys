@@ -123,3 +123,5 @@ Read AGENTS.md before editing; do not include local absolute paths or private lo
 - The screenshot of 0.1.3 confirms the 0.46D entry is green and the prior overall warning is absent. Removing the false 1.1.0 entry also removes its individual red entry. New 0.1.4 post-restart observation remains separate.
 
 - 0.1.4 Release build, actual-game API/scanner, exact normalized 0.46D match, offline publishing and README link/command parity checks passed. Manifest has exactly one GameVersions entry: 0.46D. Installed with game closed and packaged; current user screenshot independently confirms that legacy identifier is green in the installed menu. Old 1.1.0 references above are historical errors, not support claims.
+
+- Published GitHub Release v0.1.4 and updated the same PUBLIC Workshop item 3837800051; upload finished at 2026-11-11T11:36:01Z. Anonymous metadata confirms visibility=0 and the new 0.1.4 / 100-Rev13 / build 26525552 statement. Source, package and installed manifest bytes agree and declare only 0.46D. Added factual-correction notices to 0.1.1–0.1.3 release notes while preserving their original assets and tags.

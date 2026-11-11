@@ -104,3 +104,5 @@ Metadata-only maintenance update: exact name is Drag-Aware Hotkeys_解决拖拽�
 ### 0.1.4 factual compatibility correction
 
 Remove the false 1.1.0 GameVersions entry and keep only 0.46D. Official Steam news, direct SteamCMD public-branch metadata, installed build and game constants establish the tested public release as 100-Rev13 / 1.0.0.13 / build 26525552. Beta 100-Rev14 is explicitly untested. Screenshot of 0.1.3 confirms the 0.46D entry is green and the overall warning is gone; post-restart 0.1.4 appearance remains to be observed.
+
+- 0.1.4 checks passed: actual-game 0.46D normalization match, API/scanner (14 methods, no capabilities/refusals/hard flags/errors), Release build, script checks, offline publisher and bilingual README parity. Verified installed/package/source manifest bytes match and GameVersions contains exactly 0.46D. Existing public Workshop item and GitHub Release now deliver the corrected metadata. Input source is unchanged.
