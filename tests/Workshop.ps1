@@ -38,6 +38,7 @@ $expectedDescription = (Get-Content "$fixture/workshop/description.zh-CN.txt" -R
 if (!$prepared.Contains('"description" "' + $expectedDescription + '"')) { throw 'Description must retain literal newlines, Chinese first and English second.' }
 if ($prepared.Contains('\n')) { throw 'VDF must not contain escaped newline text.' }
 if (!$prepared.Contains('[url=https://github.com/fuliez/ProbablyStolen-DragAwareHotkeys]')) { throw 'Description must link the source repository.' }
+if ($prepared.Contains('/releases]') -or $prepared.Contains('/issues]')) { throw 'Workshop description must link source only.' }
 $zh = Get-Content "$fixture/workshop/description.zh-CN.txt" -Raw -Encoding utf8
 $en = Get-Content "$fixture/workshop/description.en.txt" -Raw -Encoding utf8
 foreach ($marker in @('\[h2\]', '\[\*\]')) {
@@ -48,6 +49,7 @@ foreach ($link in [regex]::Matches($zh, '\[url=([^\]]+)\]')) {
 }
 if (Test-Path "$fixture/.local/workshop/state.json") { throw 'Preparation must not invent an item ID.' }
 Expect-Rejected { & $publisher -Upload } 'requires -Upload'
+Expect-Rejected { & $publisher -Visibility Public } 'First Workshop creation must use Hidden'
 Expect-Rejected { & $publisher -Upload -ConfirmUpload 'UPLOAD HIDDEN' -SteamUser test } 'requires -NewItem'
 $upload = @{
     Upload = $true
@@ -75,9 +77,18 @@ if ((Get-Content $vdf -Raw -Encoding utf8) -notmatch '"publishedfileid" "1234567
 Expect-Rejected { & $publisher @upload -NewItem } 'already exists'
 @{ publishedfileid = '987654321' } | ConvertTo-Json | Set-Content $statePath -Encoding utf8
 Expect-Rejected { & $publisher } 'conflicts with tracked identity'
+Remove-Item -LiteralPath $statePath
+@{ appid = '4348910'; publishedfileid = '123456789'; visibility = 'Public' } | ConvertTo-Json | Set-Content $identityPath -Encoding utf8
+& $publisher
+if ((Get-Content $vdf -Raw -Encoding utf8) -notmatch '"visibility" "0"') { throw 'Existing public items must preserve their configured visibility.' }
+Expect-Rejected { & $publisher @upload } 'UPLOAD PUBLIC'
+$publicUpload = $upload.Clone()
+$publicUpload.ConfirmUpload = 'UPLOAD PUBLIC'
+& $publisher @publicUpload
+if ((Get-Content $vdf -Raw -Encoding utf8) -notmatch '"publishedfileid" "123456789"') { throw 'Public upload must update the existing item.' }
 Remove-Item -LiteralPath $identityPath
 # A creation with unknown server outcome must never silently retry as a new item.
-Remove-Item -LiteralPath $statePath
+if (Test-Path -LiteralPath $statePath) { Remove-Item -LiteralPath $statePath }
 (Get-Content $vdf -Raw -Encoding utf8).Replace('123456789','0') | Set-Content $vdf
 Set-Content "$fixture/.local/workshop/upload-pending" 'offline test'
 Expect-Rejected { & $publisher } 'Previous creation may have reached Steam'

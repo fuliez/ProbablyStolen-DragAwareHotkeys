@@ -18,7 +18,5 @@ Mod 版本：0.1.2。适配官方游戏版本：1.1.0。项目所有者已完成
 [h2]存档与权限[/h2]
 不修改存档，不覆盖游戏原始程序集，无需额外能力权限。
 
-[h2]源码、下载与反馈[/h2]
-[url=https://github.com/fuliez/ProbablyStolen-DragAwareHotkeys]GitHub 仓库：源码、更新日志与版本历史[/url]
-[url=https://github.com/fuliez/ProbablyStolen-DragAwareHotkeys/releases]GitHub Releases：独立安装包[/url]
-[url=https://github.com/fuliez/ProbablyStolen-DragAwareHotkeys/issues]问题反馈[/url]：请提供游戏版本、Mod 版本、复现步骤，以及去除隐私后的相关日志。
+[h2]源码[/h2]
+[url=https://github.com/fuliez/ProbablyStolen-DragAwareHotkeys]GitHub 开源代码[/url]

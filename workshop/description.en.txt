@@ -18,7 +18,5 @@ Support is scoped to the official game; third-party mod compatibility is not pro
 [h2]Saves and permissions[/h2]
 Does not edit saves, replace original game assemblies or request extra capabilities.
 
-[h2]Source, downloads and feedback[/h2]
-[url=https://github.com/fuliez/ProbablyStolen-DragAwareHotkeys]GitHub repository: source, changelog and version history[/url]
-[url=https://github.com/fuliez/ProbablyStolen-DragAwareHotkeys/releases]GitHub Releases: standalone packages[/url]
-[url=https://github.com/fuliez/ProbablyStolen-DragAwareHotkeys/issues]Report an issue[/url] with the game version, mod version, reproduction steps and relevant logs with private information removed.
+[h2]Source[/h2]
+[url=https://github.com/fuliez/ProbablyStolen-DragAwareHotkeys]Open-source code on GitHub[/url]

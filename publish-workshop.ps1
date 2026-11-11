@@ -6,6 +6,7 @@ param(
     [string]$PreviewFile,
     [switch]$Upload,
     [switch]$NewItem,
+    [ValidateSet('Hidden','Public')][string]$Visibility,
     [string]$ConfirmUpload
 )
 . "$PSScriptRoot/scripts/Common.ps1"
@@ -14,6 +15,7 @@ New-Item -ItemType Directory -Force $work | Out-Null
 $vdf = Join-Path $work 'item.vdf'
 $statePath = Join-Path $work 'state.json'
 $itemId = '0'
+$configuredVisibility = 'Hidden'
 $identityPath = Join-Path $ProjectRoot 'workshop/item.json'
 if (Test-Path -LiteralPath $identityPath) {
     $identity = Get-Content -LiteralPath $identityPath -Raw -Encoding utf8 | ConvertFrom-Json
@@ -21,6 +23,10 @@ if (Test-Path -LiteralPath $identityPath) {
         throw 'Invalid tracked Workshop identity. Restore workshop/item.json before continuing.'
     }
     $itemId = [string]$identity.publishedfileid
+    if ($identity.PSObject.Properties.Name -contains 'visibility') {
+        if ([string]$identity.visibility -notin @('Hidden','Public')) { throw 'Invalid tracked Workshop visibility.' }
+        $configuredVisibility = [string]$identity.visibility
+    }
 }
 if (Test-Path -LiteralPath $statePath) {
     $state = Get-Content -LiteralPath $statePath -Raw -Encoding utf8 | ConvertFrom-Json
@@ -45,8 +51,11 @@ $pending = Join-Path $work 'upload-pending'
 if ($itemId -eq '0' -and (Test-Path -LiteralPath $pending)) {
     throw 'Previous creation may have reached Steam. Recover its publishedfileid from Steam/item.vdf; do not create a duplicate.'
 }
+if (!$Visibility) { $Visibility = $configuredVisibility }
+if ($itemId -eq '0' -and $Visibility -eq 'Public') { throw 'First Workshop creation must use Hidden visibility.' }
+$confirmation = 'UPLOAD ' + $Visibility.ToUpperInvariant()
 if ($Upload) {
-    if ($ConfirmUpload -cne 'UPLOAD HIDDEN') { throw 'Uploading requires -Upload -ConfirmUpload "UPLOAD HIDDEN". This uploads content to Steam.' }
+    if ($ConfirmUpload -cne $confirmation) { throw "Uploading requires -Upload -ConfirmUpload '$confirmation'. This uploads content to Steam." }
     if (!$SteamUser) { throw 'Provide -SteamUser. SteamCMD prompts interactively for password/Steam Guard; never pass them here.' }
     if ($SteamUser -notmatch '^[A-Za-z0-9_]+$') { throw 'Invalid Steam account name.' }
     if ($itemId -eq '0' -and !$NewItem) { throw 'First creation requires -NewItem; otherwise recover the existing publishedfileid.' }
@@ -76,7 +85,7 @@ $fields = [ordered]@{
     appid = '4348910'
     publishedfileid = $itemId
     contentfolder = $content.Replace('\', '/')
-    visibility = '2'
+    visibility = $(if ($Visibility -eq 'Public') { '0' } else { '2' })
     title = [string]$manifest.Manifest.Name
     description = $description
     changenote = $note
@@ -86,7 +95,7 @@ $lines = @('"workshopitem"', '{')
 foreach ($key in $fields.Keys) { $lines += '    "' + $key + '" "' + (Format-VdfValue $fields[$key]) + '"' }
 $lines += '}'
 [System.IO.File]::WriteAllLines($vdf, [string[]]$lines, [System.Text.UTF8Encoding]::new($false))
-Write-Host "Generated hidden Workshop VDF: $vdf (item $itemId)."
+Write-Host "Generated $Visibility Workshop VDF: $vdf (item $itemId)."
 if (!$Upload) { Write-Host 'Preparation only. SteamCMD was not started.'; return }
 Set-Content -LiteralPath $pending -Value 'An upload was attempted; recover ID before retrying a creation.' -Encoding utf8
 Push-Location (Split-Path -Parent (Resolve-Path -LiteralPath $SteamCmdPath).Path)
@@ -103,4 +112,4 @@ if ($updated.Success) {
     Write-Host "Saved publishedfileid $returnedId. Future runs update this item."
 } else { throw 'No publishedfileid returned. Check Steam manually and recover ID before retrying.' }
 if ($steamExitCode -ne 0) { throw "SteamCMD exited with $steamExitCode; ID saved, verify upload on Steam." }
-Write-Host 'SteamCMD finished. Verify content and hidden visibility on Steam before any public release.'
+Write-Host "SteamCMD finished. Verify content and $Visibility visibility on Steam."

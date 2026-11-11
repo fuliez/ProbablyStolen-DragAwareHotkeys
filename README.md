@@ -1,27 +1,46 @@
 # Drag-Aware Hotkeys_解决拖拽时按键冲突
 
-A small native-loader mod for **Probably Stolen**: Storage Coordinator shortcuts are ignored while an item is being dragged. Item rotation (including Q/E), flipping, and placement stay with the game. When no item is being dragged, storage shortcuts work normally.
+[![简体中文](docs/assets/language-zh.svg)](README.md) [![English](docs/assets/language-en.svg)](README.en.md)
 
-**Version 0.1.2 — targets official game version 1.1.0. The owner reports completed in-game acceptance with no bugs found.** No save edits or replacement game assemblies. Support is scoped to the official game; third-party mod compatibility is not promised. Uses the game's own Harmony library.
+《Probably Stolen》的轻量 Mod：拖动物品时屏蔽储物协调器的容器快捷键，避免旋转物品时误触开箱。此仓库公开源码，供玩家审阅、了解实现并自行构建。
 
-## Build and install
+| 项目 | 状态 |
+| --- | --- |
+| Mod 版本 | **0.1.2** |
+| 适配游戏 | 官方 **1.1.0** |
+| 验收状态 | 项目所有者已完成官方版本游戏内验收，未发现明显问题 |
+| 支持范围 | 官方游戏；不承诺与第三方 Mod 兼容 |
 
-Requires Windows PowerShell 5.1+ or PowerShell 7+, Git, .NET SDK 6.0.410+ supporting C# 10 and netstandard2.1, and a legally installed full game. CI uses SDK 6.0.410; .NET 6 is out of support, so upgrading the development SDK is recommended as future maintenance. The runtime mod targets the game's netstandard2.1 contract.
+## 功能
 
-Set the game directory once in the current shell:
+- 拖动物品期间，屏蔽储物协调器的全部容器快捷键。
+- 保留原有 Q/E 旋转、翻转、重置朝向和放置操作；未拖动时储物快捷键正常工作。
+- 不修改存档，不覆盖原始游戏程序集，无需前置 Mod 或额外能力权限。使用游戏原生加载器和游戏自带的 Harmony。
+
+## 安装与卸载
+
+推荐通过 [Steam 创意工坊](https://steamcommunity.com/sharedfiles/filedetails/?id=3837800051)订阅、获取更新和反馈问题。订阅后，在游戏 Mods 菜单启用本 Mod、检查权限并重启游戏。
+
+手动安装也可使用 [GitHub Releases](https://github.com/fuliez/ProbablyStolen-DragAwareHotkeys/releases) 中的独立安装包：先关闭游戏，再将压缩包内的 `drag_aware_hotkeys/` 文件夹放入游戏的 `Mods/` 目录。安装包仅含 Mod DLL 和 `manifest.xml`，请勿将整个源码仓库复制到 Mods。
+
+停用并重启可恢复原版行为。卸载时取消工坊订阅，或关闭游戏后移除本地 `Mods/drag_aware_hotkeys` 文件夹。相同 Mod ID 的本地副本优先于工坊副本；重新构建或更新后需重启，开发期间可用 Mods 菜单的本地 Developer mode 减少重复授权提示。
+
+## 从源码构建
+
+需要 Windows PowerShell 5.1+ 或 PowerShell 7+、Git、支持 C# 10 / netstandard2.1 的 .NET SDK，以及合法安装的完整版游戏。CI 固定使用 SDK 6.0.410；.NET 6 已停止支持，后续维护应考虑升级开发 SDK。Mod 运行目标仍为游戏使用的 netstandard2.1。
+
+在项目根目录设置游戏路径（以下示例适用于仓库位于游戏的 `my_mod` 子目录），然后执行：
 
 ```powershell
-$env:PROBABLY_STOLEN_GAME_DIR = (Resolve-Path '..').Path # when my_mod is inside the game directory
+$env:PROBABLY_STOLEN_GAME_DIR = (Resolve-Path '..').Path
 ./build.ps1
 ./install-local.ps1
 ./package.ps1
 ```
 
-Alternatively pass `-GameDir` or copy `config.example.json` to ignored `config.local.json` and fill `GameDir`. No machine-specific paths are committed. Building does not install. Close the game before installation. Enable **Drag-Aware Hotkeys** in the game's Mods menu, review its declared permissions (none), and restart. For updates, rebuild/install and restart; local Developer mode can avoid repeated trust prompts during development. Remove `Mods/drag_aware_hotkeys` and restart to uninstall. Local copies with the same mod ID take priority over Workshop subscriptions.
+也可传入 `-GameDir`，或将 `config.example.json` 复制为被 Git 忽略的 `config.local.json` 并填写 `GameDir`。构建不会自动安装；安装前请退出游戏。本机绝对路径配置、游戏 DLL、存档、日志和登录状态不进入 Git。
 
-The release ZIP contains one `drag_aware_hotkeys/` folder with only the mod DLL and `manifest.xml`. Do not copy the repository into `Mods`.
-
-## Checks and diagnostics
+## 检查与调试
 
 ```powershell
 dotnet run --project tests/Contracts/Contracts.csproj -c Release
@@ -31,26 +50,34 @@ dotnet run --project tests/Contracts/Contracts.csproj -c Release
 ./install-local.ps1 -Configuration Debug
 ```
 
-Contract tests use hand-authored doubles; they check enable/disable, idle/drag, state failure and diagnostic throttling. They do **not** prove Harmony application, Unity lifetime behavior or input ordering. `check-game.ps1` validates signatures and runs the actual installed game's mod scanner outside Unity under .NET 6. Debug builds log drag transitions; Release logs lifecycle and one state-read failure per enable. See the game's Player.log under `%USERPROFILE%/AppData/LocalLow/Questing Goose Studio/Probably Stolen/`. Optional `dev.txt` in the game root enables F8/F9; it is not created or shipped by this project.
+契约检查使用手写替身验证启停、拖拽状态及异常回退，不代表真实 Unity 输入时序或 Harmony 加载验证。`check-game.ps1` 在 .NET 6 下验证已安装游戏的真实接口，并调用其 Mod 扫描器。工坊检查完全离线，使用模拟 SteamCMD，覆盖物品 ID、显式上传确认、可见性、UTF-8 和换行保护。
 
-See [investigation](docs/API-INVESTIGATION.md), [manual tests](docs/TESTING.md), [release process](docs/RELEASING.md), and [changelog](CHANGELOG.md). Public CI runs contract compilation and repository/script checks. An optional manually triggered trusted self-hosted job performs a real game build and compares clean-build DLL hashes. No game references are uploaded. Public runners cannot build the real DLL without game references.
+Debug 构建记录拖拽状态切换；Release 记录启停和每次启用后的首次状态读取异常。日志位于 `%USERPROFILE%/AppData/LocalLow/Questing Goose Studio/Probably Stolen/Player.log`。可选的游戏根目录 `dev.txt` 启用 F8/F9；项目不会创建或分发它。
 
-## Workshop and GitHub
+公开 CI 执行契约、脚本和离线发布检查；真实游戏构建只在手动启动的可信自托管任务中进行，并比较干净重建后的 DLL 哈希。公共运行器不下载游戏程序集，也无法在缺少这些引用时构建真实 Mod；不向 GitHub 上传游戏引用。
 
-The local repository starts on `main` and uses Semantic Versioning and Conventional Commits. Source and issue tracking: [fuliez/ProbablyStolen-DragAwareHotkeys](https://github.com/fuliez/ProbablyStolen-DragAwareHotkeys). The owner authorized the first hidden Workshop upload. See agent.md for delivery status. Public Workshop visibility still requires separate authorization.
+## 项目结构
 
-`publish-workshop.ps1` prepares a hidden (`visibility=2`) SteamCMD VDF by default and does not start SteamCMD. The first hidden upload is complete. The non-sensitive item identity is committed in workshop/item.json, with local recovery state under ignored `.local/workshop/`; future uploads update this item and reject `-NewItem`. It intentionally has no public visibility option. See [release instructions](docs/RELEASING.md) before any upload.
+| 路径 | 用途 |
+| --- | --- |
+| `src/`、`mod/` | C# 源码与原生加载器清单 |
+| `tests/`、`scripts/` | 行为检查、离线发布检查及开发工具 |
+| `docs/` | [API 调查](docs/API-INVESTIGATION.md)、[验收清单](docs/TESTING.md)、[发布流程](docs/RELEASING.md) |
+| `workshop/` | 对应的中英文简介、封面和非敏感物品标识 |
+| `AGENTS.md`、`agent.md` | AI 开发规范和接续记录 |
 
-## 中文说明
+## 版本与发布
 
-拖动物品时，屏蔽储物协调器的全部容器快捷键；未拖动时恢复正常。Q/E 旋转、翻转、放置仍由游戏处理。仅支持官方游戏版本，不承诺与第三方 Mod 兼容。不修改存档、不覆盖原始程序集，只通过游戏原生 Mod 加载器应用一个小范围 Harmony 前置补丁。
+采用 Semantic Versioning、Conventional Commits 和 `main` 分支；已发布标签及安装包保留历史。变更见 [CHANGELOG.md](CHANGELOG.md)。补丁仅作用于储物协调器的私有快捷键处理函数，游戏更新后需重新验证其接口和行为。
 
-当前 **0.1.2 适配官方游戏 1.1.0**，项目所有者已反馈完成游戏内验收，未发现问题。构建、安装、打包命令见上方。安装后请在 Mods 菜单启用并重启；先按[测试清单](docs/TESTING.md)验证功能。项目所有者已授权创建公开 GitHub 仓库及首次隐藏上传；交付状态见 agent.md，创意工坊改为公开仍需另行授权。请保管 `.local/workshop/` 中返回的物品 ID，后续只更新该物品。
+`publish-workshop.ps1` 默认只准备 SteamCMD 配置，不上传。上传必须提供与目标可见性对应的 `UPLOAD HIDDEN` 或 `UPLOAD PUBLIC` 确认；首次创建强制隐藏。现有物品 ID 保存在 `workshop/item.json`，新克隆也更新同一物品，冲突 ID 会被拒绝。Steam 密码与 Guard 验证码只在本机交互输入，不写入项目。完整流程见[发布说明](docs/RELEASING.md)。
 
-## References and license
+## 参考资料
 
-- [Game modding guide](https://github.com/dragonpan2/probably-stolen-modding/blob/main/ModdingGuide.md)
-- [Reference mod collection](https://github.com/KCN-judu/ProbablyStolen-Mods)
-- [Better Key Bindings](https://github.com/KCN-judu/ProbablyStolen-BetterKeyBindings)
+- [游戏 Modding Guide](https://github.com/dragonpan2/probably-stolen-modding/blob/main/ModdingGuide.md)
+- [参考 Mod 合集](https://github.com/KCN-judu/ProbablyStolen-Mods)
+- [Better Key Bindings 源码参考](https://github.com/KCN-judu/ProbablyStolen-BetterKeyBindings)；仅用于技术调查，不属于兼容性承诺
 
-Project code is [MIT licensed](LICENSE). Probably Stolen, Unity, Harmony and third-party assets belong to their respective owners. No game code or assemblies are redistributed.
+## 许可证
+
+项目代码采用 [MIT 许可证](LICENSE)。Probably Stolen、Unity、Harmony 及第三方素材的权利归各自所有者；仓库不分发游戏代码或程序集。原创生成封面的来源及使用说明见 [ARTWORK.md](workshop/ARTWORK.md)。

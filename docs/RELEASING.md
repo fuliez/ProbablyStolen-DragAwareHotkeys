@@ -7,7 +7,7 @@
 3. Install with the game closed, restart, complete [manual acceptance](TESTING.md). Record actual results and game compatibility; a headless test is not a play test.
 4. Update `Directory.Build.props`, `mod/manifest.xml` and `CHANGELOG.md` together. Follow SemVer; keep new work under Unreleased. Generate the package from Release only.
 5. Review `git diff`, `git diff --check` and staged paths. Never stage game assemblies, saves, credentials, decompilation, generated VDF or local config.
-6. Commit; after acceptance create annotated tag `v0.1.0` (or the next version). Only tag an accepted version; current release preparation is 0.1.1.
+6. Commit; after acceptance create annotated tag `v0.1.0` (or the next version). Only tag an accepted version; the latest released mod version is 0.1.2.
 7. The owner confirmed `ProbablyStolen-DragAwareHotkeys` as a **public** repository on 2026-11-11. Add `origin`, push `main` and explicitly chosen tags only after authorization.
 8. With authorization, create a GitHub Release from the tag and attach the runtime ZIP. Copy the version's changelog section as release notes. This workflow does not automatically publish releases.
 
@@ -22,7 +22,7 @@ Requires SteamCMD, an account that owns App 4348910, a completed cover under 1 M
 ./publish-workshop.ps1 -PreviewFile ./cover.png # optional cover for preparation
 ```
 
-The ignored `.local/workshop/item.vdf` contains `appid=4348910`, runtime content folder, Chinese description followed by its matching English translation, changenote extracted from the current version's changelog, and **visibility=2 (hidden)**. Descriptions include repository, release and issue links. Values use actual line breaks: writing backslash-n text makes Steam display those characters literally. Paths use forward slashes; embedded double quotes/nulls are rejected. Combined description length is checked against 8000 UTF-8 bytes. Local absolute paths exist only in ignored generated files. The generated ZIP contains only the mod DLL and manifest. Cover is uploaded separately.
+The ignored `.local/workshop/item.vdf` contains `appid=4348910`, runtime content folder, Chinese description followed by its matching English translation, changenote extracted from the current version's changelog, and the requested visibility (Hidden=2 or Public=0). Descriptions keep only a source-code link in the Source section; subscriptions, updates and feedback use Steam. Values use actual line breaks: writing backslash-n text makes Steam display those characters literally. Paths use forward slashes; embedded double quotes/nulls are rejected. Combined description length is checked against 8000 UTF-8 bytes. Local absolute paths exist only in ignored generated files. The generated ZIP contains only the mod DLL and manifest. Cover is uploaded separately.
 
 ## Explicitly authorized first upload
 
@@ -33,7 +33,7 @@ The first hidden upload has already completed for this project (item ID in works
   -SteamCmdPath $env:STEAMCMD_PATH -SteamUser YOUR_ACCOUNT -PreviewFile ./cover.png
 ```
 
-The script passes only the account name; SteamCMD handles password/Steam Guard interactively. Do not add a password parameter, unattended login config, credentials file, transcript or credential logging. SteamCMD's own account/session handling is outside this repository. Accept Valve's Workshop legal agreement on Steam if prompted, then verify the item's files and hidden visibility manually. A successful exit code alone is insufficient evidence of acceptance.
+The script passes only the account name; SteamCMD handles password/Steam Guard interactively. Do not add a password parameter, unattended login config, credentials file, transcript or credential logging. SteamCMD's own account/session handling is outside this repository. Accept Valve's Workshop legal agreement on Steam if prompted, then verify the item's files and intended visibility. A successful exit code alone is insufficient evidence of acceptance.
 
 SteamCMD writes `publishedfileid` back into `item.vdf`. The script preserves it in `.local/workshop/state.json` and recovers it from VDF before any regeneration. Back up **both files** securely; neither contains a password. This project also commits its non-sensitive App ID and item ID in workshop/item.json. Fresh clones use that tracked identity even without local state; conflicting IDs are rejected. Once an ID exists the script updates it and refuses `-NewItem`.
 
@@ -45,12 +45,21 @@ If creation is interrupted and no ID was saved, an upload-pending marker blocks 
 
 ## Updates and public visibility
 
-After testing a new version, update changelog/version, commit, tag, publish the authorized GitHub Release, then run the same upload command **without `-NewItem`**. Changenote is generated from that version's changelog. This script always keeps the item hidden, including updates; it has no public setting. If the item is later intentionally made public, using this script hides it again until you explicitly change visibility on Steam. This conservative behavior must be considered when planning public updates.
+After testing a new runtime version, update changelog/version, commit, tag and publish the authorized GitHub Release. Documentation and Workshop-description-only changes do not require a new runtime version. Update the existing item **without `-NewItem`**. Changenote is generated from the current version's changelog.
 
-**Changing an item to public requires separate explicit owner authorization and a manual visibility change on Steam.** The first hidden upload was authorized on 2026-11-11; actual upload results and item identity are recorded in agent.md and ignored .local/workshop state.
+Visibility defaults to the `visibility` setting in `workshop/item.json`, or Hidden when absent. Preparation never uploads. Every real upload must provide `-ConfirmUpload 'UPLOAD HIDDEN'` or `-ConfirmUpload 'UPLOAD PUBLIC'` matching its effective visibility. `-Visibility Hidden` or `-Visibility Public` can explicitly override the configuration. A first creation must always be hidden; the public path accepts only an existing item ID.
+
+On 2026-11-11 the owner explicitly authorized making item **3837800051** public after the bilingual README and source-only description changes. Its configured target is now Public so future updates preserve public visibility instead of silently hiding it. To upload an authorized public update:
+
+```powershell
+./publish-workshop.ps1 -Upload -Visibility Public -ConfirmUpload 'UPLOAD PUBLIC' `
+  -SteamUser YOUR_ACCOUNT -PreviewFile ./workshop/cover.jpg
+```
+
+Do not change visibility without the owner's authorization. Confirm the returned ID, then verify the actual remote visibility with Steam's metadata API and/or the item page. The publication record is kept in agent.md.
 
 ## Current delivery record
 
 - [Public GitHub Release v0.1.1](https://github.com/fuliez/ProbablyStolen-DragAwareHotkeys/releases/tag/v0.1.1) is published with runtime ZIP and checksum file.
 - First hidden Workshop upload completed: item 3837800051, app 4348910, submitted visibility 2. Local result and returned VDF confirm success and saved identity. The owner confirmed the page loads and has no legal-agreement prompt. The subsequent description correction updated this same item successfully; the owner confirmed the description corrections display properly. Anonymous queries cannot view this hidden item.
-- Public Workshop visibility is not authorized. Updating through this script retains hidden visibility.
+- Public Workshop visibility was subsequently authorized for the existing item after the README/description revision. See agent.md for verified publication results.

@@ -4,14 +4,14 @@ Last updated: 2026-11-11 (Asia/Singapore).
 
 ## User intent and boundaries
 
-Create the open-source project **ProbablyStolen-DragAwareHotkeys** inside `my_mod` in the installed game directory. Prevent all Storage Coordinator shortcuts while dragging items, preserve rotation and idle shortcuts, change no saves or original game assemblies. User backed up game data. The owner subsequently authorized creating and pushing the public GitHub repository ProbablyStolen-DragAwareHotkeys and the first **hidden** Workshop upload. Public Workshop visibility still requires separate authorization. Do not store Steam credentials or Guard codes.
+Create the open-source project **ProbablyStolen-DragAwareHotkeys** inside `my_mod` in the installed game directory. Prevent all Storage Coordinator shortcuts while dragging items, preserve rotation and idle shortcuts, change no saves or original game assemblies. User backed up game data. The owner subsequently authorized creating and pushing the public GitHub repository ProbablyStolen-DragAwareHotkeys and the first **hidden** Workshop upload. The owner subsequently explicitly authorized making existing item 3837800051 public after the bilingual README and source-only description revision; see the latest publication record below. Do not store Steam credentials or Guard codes.
 
 ## Completed implementation
 
 - Independent Git repository on main. MIT license, bilingual documentation, SemVer 0.1.2, changelog, Codex rules and CI. GitHub delivery status is recorded below.
 - Native IMod entry; one automatic Harmony prefix on private static `MachineStorageCoordinator.HandleHotkeys`. Checks public `ItemMouseDragHandler.current.IsDraggingItem` with Unity null comparison. No native cancellation hook exists in inspected build. All actual API evidence is in docs/API-INVESTIGATION.md.
 - Enabled flag, Release lifecycle logs, Debug drag-transition logs, fail-open state-read exception handling with once-per-enable warning. No file/save/network APIs in runtime DLL, empty capabilities.
-- Root build/install/package/publish-workshop PowerShell scripts. Configuration via parameter/env/ignored JSON. Exact DLL + manifest packaging. Upload defaults to preparation; explicit hidden upload flags required. Preserves/recover Workshop ID, refuses duplicate creation after uncertain upload.
+- Root build/install/package/publish-workshop PowerShell scripts. Configuration via parameter/env/ignored JSON. Exact DLL + manifest packaging. Upload defaults to preparation; explicit confirmation matching Hidden/Public visibility is required. Preserves/recover Workshop ID, refuses duplicate creation after uncertain upload.
 - Ignored config.local.json points at this installation for convenient local commands; never stage it. Public config.example.json remains path-free.
 - Public CI uses isolated API doubles for contract checks; optional manually dispatched trusted self-hosted CI builds actual mod and compares clean DLL hashes. Game binaries never leave the local machine through this workflow.
 - Workshop descriptions updated for official game 1.1.0, bilingual display name and owner-reported acceptance. Original cover in workshop/cover.jpg (1024 square, under 1 MB), provenance in workshop/ARTWORK.md. SteamCMD downloaded from Valve and signature validated; installed under ignored .local/steamcmd. No password/Guard code handled by the agent.
@@ -33,9 +33,9 @@ Create the open-source project **ProbablyStolen-DragAwareHotkeys** inside `my_mo
 - The owner reports completing official-game manual acceptance with no bugs on version 1.1.0. Both translated checklists record this user-reported evidence. Third-party mod coexistence is excluded from supported scope. Version 0.1.1 changes metadata/name only; reinstall and restart to confirm the updated Mods menu display. The agent has not independently observed gameplay.
 - Contract doubles do not model Unity or load Harmony. Real scanner is a static check, not a gameplay test.
 - Close the game before installing the 0.1.1 metadata/name update. Runtime input logic is unchanged from the accepted 0.1.0 implementation.
-- SteamCMD path is configured in ignored config.local.json; cover prepared. Steam account login is interactive in a local window. First Workshop agreement and delivery validation may still require the owner.
-- GitHub remote/push and first hidden Steam upload are authorized. Do not claim a remote release or Workshop ID until verified; record concrete URLs and state after delivery. No public Workshop authorization has been given.
-- Generated VDF/state are ignored. Preserve returned publishedfileid after future upload across machines. Script keeps every upload hidden, including later updates; public visibility is a separate manual authorized action.
+- SteamCMD path is configured in ignored config.local.json; cover prepared. Steam account login is interactive in a local window. The owner confirmed no Workshop agreement prompt remains; anonymous remote metadata will verify public delivery after the authorized update.
+- GitHub remote/push and first hidden Steam upload are authorized. Do not claim a remote release or Workshop ID until verified; record concrete URLs and state after delivery. Public visibility for existing item 3837800051 was explicitly authorized on 2026-11-11 after the bilingual README revision request.
+- Generated VDF/state are ignored. Preserve returned publishedfileid after future upload across machines. First creation remains forced Hidden; existing-item uploads now support explicitly confirmed Public visibility. The tracked configuration preserves the selected visibility across future updates.
 
 ## Useful commands
 
@@ -89,3 +89,10 @@ Read AGENTS.md before editing; do not include local absolute paths or private lo
 - Apply as metadata-only version 0.1.2 across manifest, README and Workshop title/description. Input source and official game 1.1.0 support are unchanged. Preserve immutable 0.1.1 tag and published assets; use a separate 0.1.2 package/tag. Update the same Workshop item 3837800051 with visibility 2; public Workshop visibility remains unauthorized.
 
 - 0.1.2 Release build, installed-game signature/scanner (14 methods, no capabilities/hard flags/refusals/errors), offline publisher checks and repository checks passed. Installed locally with game closed. Hidden update finished successfully at 2026-11-11T11:04:30Z; returned VDF and state retain item 3837800051 with exact underscore title and visibility 2. GitHub 0.1.2 package/tag follows this maintenance commit; do not rewrite 0.1.1 assets or tag.
+
+## Chinese-first README and public-launch preparation — 2026-11-11
+
+- The owner confirmed the mod has no obvious remaining issues and requested complete matching Chinese/English READMEs, default Chinese, with language buttons. README.md and README.en.md now have the same eight sections, command blocks, link targets and technical content. Local SVG buttons link between the files; GitHub renders README.md as the repository default. No runtime scripts are needed for language switching.
+- Workshop's final section now contains only Source/源码 and one repository link in each language. Removed separate download and issue links as requested; subscriptions and feedback belong on Steam. Both Workshop translations remain aligned, Chinese first.
+- The owner explicitly authorized changing existing item 3837800051 from hidden to PUBLIC. Public visibility is no longer prohibited for this item. No new item is created. Runtime version stays 0.1.2 because only docs, description and publishing controls changed.
+- Publisher now resolves Hidden/Public visibility from an explicit parameter or tracked item configuration, defaults to Hidden without configuration, refuses first creation as Public, and requires UPLOAD HIDDEN / UPLOAD PUBLIC matching the requested visibility. Tracked target is Public so later updates do not inadvertently hide it. Offline tests cover those controls under PowerShell 7 and 5.1; no credentials are added.
