@@ -95,3 +95,6 @@ Metadata-only maintenance update: exact name is Drag-Aware Hotkeys_解决拖拽�
 - Before the fix: scripts/check-game.ps1 -ReportedGameVersion 0.46D failed using the installed game's actual NormalizeVersion method, confirming the old declaration did not match.
 - Fix: retain 1.1.0 and add 0.46D to the manifest. The local screenshot/current log identify 0.46D as this build's reported runtime version; the menu normalizes it to 0.46.
 - This check guarantees an exact normalized match for the inspected menu algorithm without calling native Unity APIs outside the game. After restart, confirm the overall warning icon is gone. The older menu may still color 1.1.0 red individually; 0.46D should be green. That per-entry display is expected.
+
+- After the fix: actual-game normalization checks passed for both 0.46D and 1.1.0; real scanner reported 14 methods, no capabilities, refusals, hard flags or errors. Release/Debug builds and 10 contract checks in each configuration passed. The 0.46D regression also passed under Windows PowerShell 5.1.
+- Fixed 0.1.3 manifest was installed locally with game closed and checked against the packaged manifest. GitHub Release 0.1.3 is published. Existing Workshop item 3837800051 was updated in place, with anonymous metadata confirming public visibility and the 0.1.3 / 0.46D description. Actual menu appearance after restart remains pending.

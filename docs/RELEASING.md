@@ -7,7 +7,7 @@
 3. Install with the game closed, restart, complete [manual acceptance](TESTING.md). Record actual results and game compatibility; a headless test is not a play test.
 4. Update `Directory.Build.props`, `mod/manifest.xml` and `CHANGELOG.md` together. Follow SemVer; keep new work under Unreleased. Generate the package from Release only.
 5. Review `git diff`, `git diff --check` and staged paths. Never stage game assemblies, saves, credentials, decompilation, generated VDF or local config.
-6. Commit; after acceptance create annotated tag `v0.1.0` (or the next version). Only tag an accepted version; the latest released mod version is 0.1.2.
+6. Commit; after acceptance create annotated tag `v0.1.0` (or the next version). Only tag an accepted version; the latest released mod version is 0.1.3.
 7. The owner confirmed `ProbablyStolen-DragAwareHotkeys` as a **public** repository on 2026-11-11. Add `origin`, push `main` and explicitly chosen tags only after authorization.
 8. With authorization, create a GitHub Release from the tag and attach the runtime ZIP. Copy the version's changelog section as release notes. This workflow does not automatically publish releases.
 
@@ -60,7 +60,7 @@ Do not change visibility without the owner's authorization. Confirm the returned
 
 ## Current delivery record
 
-- [Public GitHub Release v0.1.2](https://github.com/fuliez/ProbablyStolen-DragAwareHotkeys/releases/tag/v0.1.2) contains the current runtime ZIP and checksum file; previous releases remain available.
+- [Public GitHub Release v0.1.3](https://github.com/fuliez/ProbablyStolen-DragAwareHotkeys/releases/tag/v0.1.3) contains the current runtime ZIP and checksum file; previous releases remain available.
 - [Steam Workshop item 3837800051](https://steamcommunity.com/sharedfiles/filedetails/?id=3837800051) is PUBLIC after explicit owner authorization. Anonymous metadata verification returned result=1, visibility=0 and consumer_app_id=4348910, with the correct underscore title and source-only bilingual description. The item ID is unchanged from the original hidden creation.
 - README.md is the Chinese repository homepage; README.en.md provides the equivalent English version with language buttons in both. Workshop subscriptions, updates and feedback use Steam; its Source section only links the repository.
-- Runtime remains 0.1.2; these documentation and publishing changes do not replace released runtime artifacts or tags. The latest verification record is in agent.md.
+- Runtime package is now 0.1.3 with the additional 0.46D compatibility identifier; prior packages and tags remain intact. Input behavior is unchanged. The latest verification record is in agent.md.
