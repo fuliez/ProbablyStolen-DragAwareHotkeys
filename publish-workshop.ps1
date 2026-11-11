@@ -64,21 +64,26 @@ $changelog = Get-Content (Join-Path $ProjectRoot 'CHANGELOG.md') -Raw -Encoding 
 $release = [regex]::Match($changelog, '(?ms)^## \[' + [regex]::Escape($version) + '\][^\r\n]*\r?\n(.*?)(?=^## \[|\z)')
 if (!$release.Success) { throw "CHANGELOG has no entry for $version." }
 $note = "v$version`n" + $release.Groups[1].Value.Trim()
-$description = (Get-Content (Join-Path $ProjectRoot 'workshop/description.en.txt') -Raw -Encoding utf8).Trim() + "`n`n" + (Get-Content (Join-Path $ProjectRoot 'workshop/description.zh-CN.txt') -Raw -Encoding utf8).Trim()
+$description = (Get-Content (Join-Path $ProjectRoot 'workshop/description.zh-CN.txt') -Raw -Encoding utf8).Trim() + "`n`n[hr][/hr]`n`n" + (Get-Content (Join-Path $ProjectRoot 'workshop/description.en.txt') -Raw -Encoding utf8).Trim()
+if ([System.Text.Encoding]::UTF8.GetByteCount($description) -gt 8000) { throw 'Workshop description exceeds 8000 UTF-8 bytes.' }
 [xml]$manifest = Get-Content (Join-Path $ProjectRoot 'mod/manifest.xml') -Raw -Encoding utf8
-function Escape-Vdf([string]$Value) { return $Value.Replace('\', '\\').Replace('"', '\"').Replace("`r", '').Replace("`n", '\n') }
+function Format-VdfValue([string]$Value) {
+    # SteamCMD's KeyValues reader uses literal multiline strings. Escaped \n is shown verbatim on Steam.
+    if ($Value.Contains('"') -or $Value.Contains([string][char]0)) { throw 'VDF values cannot contain double quotes or null characters.' }
+    return $Value.Replace("`r`n", "`n").Replace("`r", "`n")
+}
 $fields = [ordered]@{
     appid = '4348910'
     publishedfileid = $itemId
-    contentfolder = $content
+    contentfolder = $content.Replace('\', '/')
     visibility = '2'
     title = [string]$manifest.Manifest.Name
     description = $description
     changenote = $note
 }
-if ($PreviewFile) { $fields.previewfile = (Resolve-Path -LiteralPath $PreviewFile).Path }
+if ($PreviewFile) { $fields.previewfile = (Resolve-Path -LiteralPath $PreviewFile).Path.Replace('\', '/') }
 $lines = @('"workshopitem"', '{')
-foreach ($key in $fields.Keys) { $lines += '    "' + $key + '" "' + (Escape-Vdf $fields[$key]) + '"' }
+foreach ($key in $fields.Keys) { $lines += '    "' + $key + '" "' + (Format-VdfValue $fields[$key]) + '"' }
 $lines += '}'
 [System.IO.File]::WriteAllLines($vdf, [string[]]$lines, [System.Text.UTF8Encoding]::new($false))
 Write-Host "Generated hidden Workshop VDF: $vdf (item $itemId)."

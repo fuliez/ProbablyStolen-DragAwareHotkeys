@@ -22,7 +22,7 @@ Requires SteamCMD, an account that owns App 4348910, a completed cover under 1 M
 ./publish-workshop.ps1 -PreviewFile ./cover.png # optional cover for preparation
 ```
 
-The ignored `.local/workshop/item.vdf` contains `appid=4348910`, runtime content folder, English and Chinese description, changenote extracted from the current version's changelog, and **visibility=2 (hidden)**. Local absolute paths exist only in ignored generated files. The generated ZIP contains only the mod DLL and manifest. Cover is uploaded separately.
+The ignored `.local/workshop/item.vdf` contains `appid=4348910`, runtime content folder, Chinese description followed by its matching English translation, changenote extracted from the current version's changelog, and **visibility=2 (hidden)**. Descriptions include repository, release and issue links. Values use actual line breaks: writing backslash-n text makes Steam display those characters literally. Paths use forward slashes; embedded double quotes/nulls are rejected. Combined description length is checked against 8000 UTF-8 bytes. Local absolute paths exist only in ignored generated files. The generated ZIP contains only the mod DLL and manifest. Cover is uploaded separately.
 
 ## Explicitly authorized first upload
 
@@ -52,5 +52,5 @@ After testing a new version, update changelog/version, commit, tag, publish the 
 ## Current delivery record
 
 - [Public GitHub Release v0.1.1](https://github.com/fuliez/ProbablyStolen-DragAwareHotkeys/releases/tag/v0.1.1) is published with runtime ZIP and checksum file.
-- First hidden Workshop upload completed: item 3837800051, app 4348910, submitted visibility 2. Local result and returned VDF confirm success and saved identity. Owner-authenticated page/Workshop agreement verification is still required; anonymous queries cannot view this hidden item.
+- First hidden Workshop upload completed: item 3837800051, app 4348910, submitted visibility 2. Local result and returned VDF confirm success and saved identity. The owner confirmed the page loads and has no legal-agreement prompt. The subsequent description correction updated this same item successfully; final refreshed-page presentation confirmation remains pending. Anonymous queries cannot view this hidden item.
 - Public Workshop visibility is not authorized. Updating through this script retains hidden visibility.

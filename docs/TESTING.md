@@ -36,7 +36,7 @@ The contract executable checks 10 lifecycle/state/failure outcomes in each confi
 - Offline Workshop safeguards: passed under PowerShell 7 and Windows PowerShell 5.1. Real preparation/build/package also passed under 5.1 after adding explicit UTF-8 reads.
 - Installed 0.1.1 into Mods/drag_aware_hotkeys with the game closed. Corrected manifest declares 1.1.0 and the bilingual display name; updated menu appearance awaits the owner's visual confirmation.
 - Release DLL SHA-256: `7341770A95DE11999F0AD96DACF699790AA86DF8B98AE3BFC5CBA07BBEC982B9`.
-- First hidden Workshop upload completed; Steam returned item ID 3837800051. VDF preserves visibility 2 and the bilingual title. Owner-authenticated page/cover/agreement confirmation remains pending.
+- First hidden Workshop upload completed; Steam returned item ID 3837800051. VDF preserves visibility 2 and the bilingual title. The owner confirmed the page loads without a legal-agreement prompt. Their description feedback was fixed and uploaded to the same hidden item; final refreshed-page confirmation remains pending.
 - [Public GitHub Release](https://github.com/fuliez/ProbablyStolen-DragAwareHotkeys/releases/tag/v0.1.1) uploaded with runtime ZIP and SHA256SUMS.txt; downloaded ZIP verified against that checksum. ZIP timestamps may differ between later local packaging runs.
 
 ## Manual matrix

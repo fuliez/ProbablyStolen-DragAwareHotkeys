@@ -6,6 +6,7 @@ All notable changes are recorded here. Versions follow Semantic Versioning.
 
 - Preserve bilingual Workshop metadata in Windows PowerShell 5.1 by reading manifests and descriptions explicitly as UTF-8; add matching CI coverage. Runtime DLL and mod version are unchanged.
 - Keep the created Workshop identity in source control and reject conflicting local state, so fresh clones update the existing item.
+- Fix literal backslash-n text in Workshop descriptions by writing actual multiline VDF strings; place Chinese first, align both translations and add repository, release and issue links.
 
 ## [0.1.1] - 2026-11-11
 

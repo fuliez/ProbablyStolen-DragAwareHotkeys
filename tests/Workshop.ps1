@@ -33,6 +33,19 @@ $vdf = Join-Path $fixture '.local/workshop/item.vdf'
 if ((Get-Content $vdf -Raw -Encoding utf8) -notmatch '"visibility" "2"') { throw 'Preparation must be hidden.' }
 [xml]$manifest = Get-Content "$fixture/mod/manifest.xml" -Raw -Encoding utf8
 if (!(Get-Content $vdf -Raw -Encoding utf8).Contains('"title" "' + $manifest.Manifest.Name + '"')) { throw 'Bilingual title was not preserved as UTF-8.' }
+$prepared = (Get-Content $vdf -Raw -Encoding utf8).Replace("`r`n", "`n")
+$expectedDescription = (Get-Content "$fixture/workshop/description.zh-CN.txt" -Raw -Encoding utf8).Trim().Replace("`r`n", "`n") + "`n`n[hr][/hr]`n`n" + (Get-Content "$fixture/workshop/description.en.txt" -Raw -Encoding utf8).Trim().Replace("`r`n", "`n")
+if (!$prepared.Contains('"description" "' + $expectedDescription + '"')) { throw 'Description must retain literal newlines, Chinese first and English second.' }
+if ($prepared.Contains('\n')) { throw 'VDF must not contain escaped newline text.' }
+if (!$prepared.Contains('[url=https://github.com/fuliez/ProbablyStolen-DragAwareHotkeys]')) { throw 'Description must link the source repository.' }
+$zh = Get-Content "$fixture/workshop/description.zh-CN.txt" -Raw -Encoding utf8
+$en = Get-Content "$fixture/workshop/description.en.txt" -Raw -Encoding utf8
+foreach ($marker in @('\[h2\]', '\[\*\]')) {
+    if ([regex]::Matches($zh, $marker).Count -ne [regex]::Matches($en, $marker).Count) { throw 'Bilingual section/bullet structure must match.' }
+}
+foreach ($link in [regex]::Matches($zh, '\[url=([^\]]+)\]')) {
+    if (!$en.Contains($link.Value)) { throw 'Both descriptions must provide the same links.' }
+}
 if (Test-Path "$fixture/.local/workshop/state.json") { throw 'Preparation must not invent an item ID.' }
 Expect-Rejected { & $publisher -Upload } 'requires -Upload'
 Expect-Rejected { & $publisher -Upload -ConfirmUpload 'UPLOAD HIDDEN' -SteamUser test } 'requires -NewItem'
