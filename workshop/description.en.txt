@@ -1,4 +1,4 @@
-[h1]Drag-Aware Hotkeys[/h1]
+[h1]Drag-Aware Hotkeys（解决拖拽时按键冲突）[/h1]
 Rotate the item you are carrying without opening your storage containers.
 
 [list]
@@ -11,6 +11,6 @@ Rotate the item you are carrying without opening your storage containers.
 Subscribe, enable Drag-Aware Hotkeys in the Mods menu, review permissions, and restart the game. No additional mod is required. This mod does not edit saves or replace game assemblies. Disable and restart to return to the original behavior.
 
 [h2]Compatibility[/h2]
-Development candidate 0.1.0: compiled against 100-Rev13 (Steam build 26525552); in-game acceptance is pending. Uses one Harmony prefix on the game's Storage Coordinator hotkey handler. Mods that replace that handler may conflict. Better Key Bindings is optional; coexistence has not yet been tested.
+Version 0.1.1 targets the official game version 1.1.0. The owner completed official-game acceptance with no bugs reported. Uses one Harmony prefix on the game's Storage Coordinator hotkey handler. Compatibility with third-party mods is outside the supported scope; mods that replace the same handler may conflict.
 
 No extra capabilities requested. Please report game build, mod version, other input mods, reproduction steps and relevant log lines with private information removed.

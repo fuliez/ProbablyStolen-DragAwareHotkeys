@@ -3,7 +3,7 @@
 ## Evidence and environment
 
 - Installed full-game Steam App ID: **4348910**, build ID **26525552** (read from local Steam app manifest; no account data copied).
-- `PlayerStore.VERSION_NUMBER` and `PlayerStore.VERSION`: **VERSION 100-Rev13**. Manifest targets `1.0.0.13`, the normalized store label. The installed revision predates the guide's newer game-version helper; no `ModHelper.GetGameVersion()` is used. In-game compatibility display still needs checking.
+- `PlayerStore.VERSION_NUMBER` and `PlayerStore.VERSION`: **VERSION 100-Rev13**. The first manifest incorrectly inferred `1.0.0.13` from this internal constant. The owner reports the actual supported official game version is **1.1.0**; 0.1.1 declares `1.1.0` based on the owner's completed in-game acceptance. The internal constant and serialized Unity Application.version (`0.46D`) are stale and are not treated as authoritative release labels. The installed revision predates the guide's newer game-version helper; no `ModHelper.GetGameVersion()` is used. After installing 0.1.1, the updated compatibility display needs a quick visual confirmation.
 - `Assembly-CSharp.dll` SHA-256: `725CB999D019DFF1FF31BED353C7F9BB8D81A7605A15DE1F80F5A3A6CF7B1D05`.
 - Git and .NET SDK **6.0.410** available. SteamCMD not found on PATH. ILSpy CLI **8.2.0.7535** installed under ignored `.local/tools` for read-only inspection.
 - Local guide commit: `3541332ad755a07e423077659863268256ccd233`.
@@ -38,8 +38,8 @@ Better Key Bindings reads the same public drag property for rotation contexts, b
 - Release and Debug compiled successfully against actual installed references, zero warnings/errors.
 - Installed-game signature check passed; actual `ModScanner.Scan` reported **14 methods, refused=false, capabilities=0, hard flags=0, error=none** for Release.
 - The first scanner harness attempt under desktop .NET Framework failed on `String.Split(char, StringSplitOptions)`, a runtime mismatch. The final script runs under .NET 6 and the scan completes without that error.
-- Contract checks passed in Release and Debug. Actual input timing, Unity destroyed-object behavior, loader patch application, mod interaction, game restart and Workshop upload require manual validation.
-- `StoreUIManager.Update` and `InputActionManager.Update` are separate Unity updates. First-threshold frame and drop/cancel frame order must be tested; this patch checks the game's current logical drag state and does not invent a second mouse-drag state machine.
+- Contract checks passed in Release and Debug. The owner subsequently reported passing the official-game manual matrix with no bugs on 1.1.0. This is owner-reported gameplay evidence. Third-party mod coexistence is excluded from support; Workshop delivery remains a separate validation.
+- `StoreUIManager.Update` and `InputActionManager.Update` are separate Unity updates. First-threshold frame and drop/cancel frame order are included in the owner-reported manual acceptance; this patch checks the game's current logical drag state and does not invent a second mouse-drag state machine.
 - This is a private target, so re-inspect after game updates. A compile success alone does not establish continued behavior compatibility.
 
 ## Sources

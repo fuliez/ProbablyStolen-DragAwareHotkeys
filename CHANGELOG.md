@@ -4,7 +4,19 @@ All notable changes are recorded here. Versions follow Semantic Versioning.
 
 ## [Unreleased]
 
-- Pending in-game acceptance and first authorized release.
+- No changes yet.
+
+## [0.1.1] - 2026-11-11
+
+### Fixed
+
+- Declare game compatibility as 1.1.0, matching the version reported and tested by the owner, instead of inferring it from a stale internal version constant.
+
+### Changed
+
+- Display the bilingual name Drag-Aware Hotkeys（解决拖拽时按键冲突）in the game and on the Workshop.
+- Scope acceptance to the official game; remove the Better Key Bindings coexistence requirement.
+- Record the owner's completed official-game acceptance with no bugs reported. Input behavior is unchanged from 0.1.0.
 
 ## [0.1.0] - 2026-11-11
 

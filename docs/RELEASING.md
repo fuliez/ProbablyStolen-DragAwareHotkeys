@@ -7,15 +7,15 @@
 3. Install with the game closed, restart, complete [manual acceptance](TESTING.md). Record actual results and game compatibility; a headless test is not a play test.
 4. Update `Directory.Build.props`, `mod/manifest.xml` and `CHANGELOG.md` together. Follow SemVer; keep new work under Unreleased. Generate the package from Release only.
 5. Review `git diff`, `git diff --check` and staged paths. Never stage game assemblies, saves, credentials, decompilation, generated VDF or local config.
-6. Commit; after acceptance create annotated tag `v0.1.0` (or the next version). No release tag exists yet.
-7. **Wait for owner confirmation of repository name and public/private visibility before creating a remote or pushing.** Proposed repository name: `ProbablyStolen-DragAwareHotkeys`. Add `origin`, push `main` and explicitly chosen tags only after authorization.
+6. Commit; after acceptance create annotated tag `v0.1.0` (or the next version). Only tag an accepted version; current release preparation is 0.1.1.
+7. The owner confirmed `ProbablyStolen-DragAwareHotkeys` as a **public** repository on 2026-11-11. Add `origin`, push `main` and explicitly chosen tags only after authorization.
 8. With authorization, create a GitHub Release from the tag and attach the runtime ZIP. Copy the version's changelog section as release notes. This workflow does not automatically publish releases.
 
 Public GitHub Actions checks compile/run contract tests and validate scripts and tracked-file policy. For real builds, a trusted Windows self-hosted runner can set `PROBABLY_STOLEN_GAME_DIR`, use label `probably-stolen`, and repository variable `ENABLE_LOCAL_GAME_BUILD=true`. Only manual dispatch runs that job. Use a private runner/repository or a tightly controlled runner group; never execute untrusted branch content on a machine with personal data. Two builds on that runner compare DLL hashes. Different game reference versions are different build inputs; record the game DLL fingerprint. ZIP container timestamps are not promised to be byte-identical.
 
 ## Steam Workshop preparation
 
-Requires SteamCMD, an account that owns App 4348910, a completed cover under 1 MB, and completed game acceptance. See [cover brief](../workshop/COVER-BRIEF.md). SteamCMD is not installed by these scripts.
+Requires SteamCMD, an account that owns App 4348910, a completed cover under 1 MB, and completed game acceptance. See [cover brief](../workshop/COVER-BRIEF.md). SteamCMD has been installed locally under ignored .local/steamcmd and its path is in ignored config.local.json. The scripts do not install it on other machines.
 
 ```powershell
 ./publish-workshop.ps1                     # builds/packages, generates VDF, uploads nothing
@@ -47,4 +47,4 @@ If creation is interrupted and no ID was saved, an upload-pending marker blocks 
 
 After testing a new version, update changelog/version, commit, tag, publish the authorized GitHub Release, then run the same upload command **without `-NewItem`**. Changenote is generated from that version's changelog. This script always keeps the item hidden, including updates; it has no public setting. If the item is later intentionally made public, using this script hides it again until you explicitly change visibility on Steam. This conservative behavior must be considered when planning public updates.
 
-**Changing an item to public requires separate explicit owner authorization and a manual visibility change on Steam.** No public publication or upload has occurred in this development session.
+**Changing an item to public requires separate explicit owner authorization and a manual visibility change on Steam.** The first hidden upload was authorized on 2026-11-11; actual upload results and item identity are recorded in agent.md and ignored .local/workshop state.

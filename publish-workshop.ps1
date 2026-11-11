@@ -61,7 +61,7 @@ $fields = [ordered]@{
     publishedfileid = $itemId
     contentfolder = $content
     visibility = '2'
-    title = 'Drag-Aware Hotkeys'
+    title = 'Drag-Aware Hotkeys（解决拖拽时按键冲突）'
     description = $description
     changenote = $note
 }
@@ -73,8 +73,11 @@ $lines += '}'
 Write-Host "Generated hidden Workshop VDF: $vdf (item $itemId)."
 if (!$Upload) { Write-Host 'Preparation only. SteamCMD was not started.'; return }
 Set-Content -LiteralPath $pending -Value 'An upload was attempted; recover ID before retrying a creation.' -Encoding utf8
-& $SteamCmdPath '+login' $SteamUser '+workshop_build_item' $vdf '+quit'
-$steamExitCode = $LASTEXITCODE
+Push-Location (Split-Path -Parent (Resolve-Path -LiteralPath $SteamCmdPath).Path)
+try {
+    & $SteamCmdPath '+login' $SteamUser '+workshop_build_item' $vdf '+quit'
+    $steamExitCode = $LASTEXITCODE
+} finally { Pop-Location }
 $updated = [regex]::Match((Get-Content -LiteralPath $vdf -Raw), '"publishedfileid"\s+"([1-9][0-9]*)"')
 if ($updated.Success) {
     $returnedId = $updated.Groups[1].Value

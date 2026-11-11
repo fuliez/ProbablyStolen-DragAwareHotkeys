@@ -4,6 +4,7 @@ Read `agent.md`, README.md, docs/API-INVESTIGATION.md and docs/TESTING.md before
 
 - This directory is the independent project root. Keep all development artifacts here. The parent is an installed game, not a source repository.
 - Scope: suppress Storage Coordinator container hotkeys only during actual item dragging. Preserve idle hotkeys, native rotation and save data. Prefer a native cancellable hook if one becomes available; otherwise maintain the smallest game-only Harmony patch.
+- Support and acceptance cover the official game only. Do not add third-party mod coexistence as a release requirement. Compatibility version is 1.1.0 as reported and tested by the owner; stale internal version constants are not authoritative release labels.
 - Verify every game API against the installed binary or authoritative documentation. Do not assume newest online APIs exist locally. Reinspect private `MachineStorageCoordinator.HandleHotkeys` after game updates.
 - Use the native IMod loader and automatic Harmony attributes. Do not ship Harmony or game assemblies; do not patch Unity/system/loader/trust code. Keep capabilities empty unless a reviewed feature demonstrably needs more.
 - Never overwrite original game assemblies or edit saves. Do not launch tests that mutate saves without an explicit request. Install only the allowlisted DLL and manifest into this mod's folder.

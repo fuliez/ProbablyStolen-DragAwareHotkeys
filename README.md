@@ -1,8 +1,8 @@
-# ProbablyStolen-DragAwareHotkeys
+# Drag-Aware Hotkeys（解决拖拽时按键冲突）
 
 A small native-loader mod for **Probably Stolen**: Storage Coordinator shortcuts are ignored while an item is being dragged. Item rotation (including Q/E), flipping, and placement stay with the game. When no item is being dragged, storage shortcuts work normally.
 
-**Status: 0.1.0 development candidate. Compiles against Steam build 26525552 / 100-Rev13; in-game acceptance is pending.** No save edits or replacement game assemblies. No dependency on Better Key Bindings. Uses the game's own Harmony library.
+**Version 0.1.1 — targets official game version 1.1.0. The owner reports completed in-game acceptance with no bugs found.** No save edits or replacement game assemblies. Support is scoped to the official game; third-party mod compatibility is not promised. Uses the game's own Harmony library.
 
 ## Build and install
 
@@ -37,15 +37,15 @@ See [investigation](docs/API-INVESTIGATION.md), [manual tests](docs/TESTING.md),
 
 ## Workshop and GitHub
 
-The local repository starts on `main` and uses Semantic Versioning and Conventional Commits. No remote is configured. Create/push a remote only after the owner confirms its name and visibility. Do not publish Releases or Workshop uploads without explicit authorization.
+The local repository starts on `main` and uses Semantic Versioning and Conventional Commits. Source and issue tracking: [fuliez/ProbablyStolen-DragAwareHotkeys](https://github.com/fuliez/ProbablyStolen-DragAwareHotkeys). The owner authorized the first hidden Workshop upload. See agent.md for delivery status. Public Workshop visibility still requires separate authorization.
 
 `publish-workshop.ps1` prepares a hidden (`visibility=2`) SteamCMD VDF by default and does not start SteamCMD. Its ignored `.local/workshop/` folder preserves the item ID. It intentionally has no public visibility option. See [release instructions](docs/RELEASING.md) before any upload.
 
 ## 中文说明
 
-拖动物品时，屏蔽储物协调器的全部容器快捷键；未拖动时恢复正常。Q/E 旋转、翻转、放置仍由游戏处理。无需 Better Key Bindings，不修改存档、不覆盖原始程序集，只通过游戏原生 Mod 加载器应用一个小范围 Harmony 前置补丁。
+拖动物品时，屏蔽储物协调器的全部容器快捷键；未拖动时恢复正常。Q/E 旋转、翻转、放置仍由游戏处理。仅支持官方游戏版本，不承诺与第三方 Mod 兼容。不修改存档、不覆盖原始程序集，只通过游戏原生 Mod 加载器应用一个小范围 Harmony 前置补丁。
 
-当前是 **0.1.0 待游戏内验收版本**，已针对本机 `100-Rev13 / Steam build 26525552` 编译。构建、安装、打包命令见上方。安装后请在 Mods 菜单启用并重启；先按[测试清单](docs/TESTING.md)验证功能。未创建远程仓库、Release 或 Workshop 物品；首次上传强制隐藏，必须显式确认。请保管 `.local/workshop/` 中返回的物品 ID，后续只更新该物品。
+当前 **0.1.1 适配官方游戏 1.1.0**，项目所有者已反馈完成游戏内验收，未发现问题。构建、安装、打包命令见上方。安装后请在 Mods 菜单启用并重启；先按[测试清单](docs/TESTING.md)验证功能。项目所有者已授权创建公开 GitHub 仓库及首次隐藏上传；交付状态见 agent.md，创意工坊改为公开仍需另行授权。请保管 `.local/workshop/` 中返回的物品 ID，后续只更新该物品。
 
 ## References and license
 
