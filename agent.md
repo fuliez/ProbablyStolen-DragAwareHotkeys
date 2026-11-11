@@ -8,7 +8,7 @@ Create the open-source project **ProbablyStolen-DragAwareHotkeys** inside `my_mo
 
 ## Completed implementation
 
-- Independent Git repository on main. MIT license, bilingual documentation, SemVer 0.1.5, changelog, Codex rules and CI. GitHub delivery status is recorded below.
+- Independent Git repository on main. MIT license, bilingual documentation, SemVer 0.1.6, changelog, Codex rules and CI. GitHub delivery status is recorded below.
 - Native IMod entry; one automatic Harmony prefix on private static `MachineStorageCoordinator.HandleHotkeys`. Checks public `ItemMouseDragHandler.current.IsDraggingItem` with Unity null comparison. No native cancellation hook exists in inspected build. All actual API evidence is in docs/API-INVESTIGATION.md.
 - Enabled flag, Release lifecycle logs, Debug drag-transition logs, fail-open state-read exception handling with once-per-enable warning. No file/save/network APIs in runtime DLL, empty capabilities.
 - Root build/install/package/publish-workshop PowerShell scripts. Configuration via parameter/env/ignored JSON. Exact DLL + manifest packaging. Upload defaults to preparation; explicit confirmation matching Hidden/Public visibility is required. Preserves/recover Workshop ID, refuses duplicate creation after uncertain upload.
@@ -135,3 +135,11 @@ Read AGENTS.md before editing; do not include local absolute paths or private lo
 - 0.1.5 checks passed: Release build, actual-game API/scanner and 0.46D normalization, repository/script checks, parsed XML author/description ordering and source/package/installed manifest byte equality. Bilingual README commands remain identical. Installed while the game was closed. Actual restarted menu rendering remains pending owner observation.
 
 - Published GitHub Release v0.1.5 with runtime ZIP and checksum; downloaded asset checksum verified. Public Workshop update finished at 2026-11-11T11:45:02Z on existing item 3837800051; anonymous metadata confirms public visibility, 0.1.5 and both fuliezi bylines. Source commit 6901c22 Actions passed. Assembly file metadata also reports company fuliezi and Copyright (c) 2026 fuliezi. Current source credits have no old project/contributors placeholder.
+
+## In-game cover preview — 2026-11-11
+
+- Owner reported no image above the mod title in the game's Mods menu. Inspected installed ModUIManager.GetPreview/GetLocalPreview: local copies load root preview.png (or a registered preview sprite); Workshop copies prefer Steam preview URLs and fall back to the local PNG. GetLocalPreview caches even a missing/null result, so restart is required after adding the file.
+- Root cause: earlier packaging allowlist contained only DLL + manifest. The existing cover.jpg was uploaded separately to Steam and never bundled. A locally prioritized copy therefore had no preview. Old two-file packaging rules are superseded by 0.1.6's exact THREE-file allowlist.
+- New mod/preview.png re-encodes the existing workshop/cover.jpg as actual PNG, 1024 square, with identical decoded RGB pixels. No new illustration or visual redesign. Builds/packages/install now include it; installer allows the exact legacy two-file layout for migration while rejecting unexpected files. No runtime input changes or extra capabilities.
+
+- 0.1.6 validated: decoded preview PNG pixels exactly equal the existing JPEG cover; source/installed/ZIP preview bytes match. Actual-game scanner and API/version checks passed. Exact three-file ZIP verified; strict validation rejects missing preview and unexpected files while legacy two-file upgrade succeeds. Installed while the game was closed. Clean rebuild DLL hash unchanged. In-game rendered appearance after restart remains pending owner confirmation.

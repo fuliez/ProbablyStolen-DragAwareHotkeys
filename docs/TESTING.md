@@ -112,3 +112,7 @@ Remove the false 1.1.0 GameVersions entry and keep only 0.46D. Official Steam ne
 Metadata-only update: author is fuliezi across current credits and package metadata. Manifest Description contains equivalent Chinese first, a blank line, then English. Check installed/package/source XML bytes and parsed text order; after restarting, confirm the game displays author fuliezi and both paragraphs. Input behavior and GameVersions are unchanged.
 
 - 0.1.5 verification passed: actual-game API/scanner and runtime normalization; zero-warning Release build; parsed XML author and real Chinese-first/English-second paragraphs; identical source/package/installed manifest; assembly company/copyright values fuliezi; matching bilingual README commands. Published GitHub ZIP checksum verified and existing public Workshop item confirms version and bilingual author credits. Actual post-restart menu display remains pending owner confirmation.
+
+### 0.1.6 native cover packaging
+
+Verify mod/preview.png is a valid 1024-square PNG with pixels identical to the existing cover.jpg. New build/package/install folders must contain exactly DLL, manifest.xml and preview.png; missing previews and unexpected dependencies must be rejected, while upgrading an exact old two-file install succeeds. After restarting, select the local mod and confirm the cover appears above its title. Workshop uses the Steam preview when available and the packaged PNG as fallback. Actual Unity rendering still requires owner observation.

@@ -24,10 +24,13 @@ function Get-ModVersion {
     return [string]$props.Project.PropertyGroup.Version
 }
 function Assert-RuntimeFolder([string]$Path, [switch]$AllowOlderVersion) {
-    $expected = @('manifest.xml', 'ProbablyStolen.DragAwareHotkeys.dll')
+    $expected = @('manifest.xml', 'ProbablyStolen.DragAwareHotkeys.dll', 'preview.png')
     $actual = @(Get-ChildItem -LiteralPath $Path -Force)
-    if ($actual.Count -ne 2 -or @($actual | Where-Object { $_.PSIsContainer -or $_.Name -notin $expected }).Count -gt 0) {
-        throw 'Runtime folder must contain exactly the manifest and mod DLL.'
+    # Existing pre-0.1.6 installations contain only two files. Accept that exact
+    # legacy shape for upgrade validation, but require the preview in new builds.
+    if ($AllowOlderVersion -and $actual.Count -eq 2) { $expected = @('manifest.xml', 'ProbablyStolen.DragAwareHotkeys.dll') }
+    if ($actual.Count -ne $expected.Count -or @($actual | Where-Object { $_.PSIsContainer -or $_.Name -notin $expected }).Count -gt 0) {
+        throw 'Runtime folder must contain exactly the manifest, mod DLL and preview.png (legacy two-file installs may be upgraded).'
     }
     [xml]$manifest = Get-Content (Join-Path $Path 'manifest.xml') -Raw -Encoding utf8
     if ($manifest.Manifest.ID -ne 'drag_aware_hotkeys' -or (!$AllowOlderVersion -and $manifest.Manifest.ModVersion -ne (Get-ModVersion))) { throw 'Manifest id/version mismatch.' }

@@ -3,7 +3,7 @@
   <ID>drag_aware_hotkeys</ID>
   <Name>Drag-Aware Hotkeys_解决拖拽时按键冲突</Name>
   <Author>fuliezi</Author>
-  <ModVersion>0.1.5</ModVersion>
+  <ModVersion>0.1.6</ModVersion>
   <Description>拖动物品时屏蔽储物协调器快捷键。保留物品旋转，以及未拖拽物品时的正常储物快捷键。
 
 Block Storage Coordinator hotkeys while dragging items. Keep item rotation and normal storage shortcuts when not dragging.</Description>

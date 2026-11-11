@@ -6,6 +6,14 @@ All notable changes are recorded here. Versions follow Semantic Versioning.
 
 - No changes yet.
 
+## [0.1.6] - 2026-11-11
+
+### Fixed
+
+- Bundle preview.png at the mod root so the native Mods menu displays the existing cover for local copies and as an offline/failed-download fallback for Workshop copies.
+- Include the preview in build, install and release packages; permit safe upgrades from the exact legacy two-file installation layout.
+- Reuse the existing cover without changing its pixels. Input behavior, author and compatibility declaration are unchanged.
+
 ## [0.1.5] - 2026-11-11
 
 ### Changed

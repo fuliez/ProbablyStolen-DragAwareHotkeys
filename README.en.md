@@ -6,7 +6,7 @@ A lightweight mod for *Probably Stolen*: suppress Storage Coordinator container 
 
 | Item | Status |
 | --- | --- |
-| Mod version | **0.1.5** |
+| Mod version | **0.1.6** |
 | Author | **fuliezi** |
 | Tested game | Public **100-Rev13 / 1.0.0.13**, build **26525552** |
 | Menu compatibility identifier | **0.46D** (the legacy runtime version retained by this public build) |
@@ -25,7 +25,7 @@ See [game-version verification](docs/GAME-VERSIONS.md) for evidence. The earlier
 
 Use the [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3837800051) for subscriptions, updates and feedback. After subscribing, enable this mod in the game's Mods menu, review permissions and restart the game.
 
-For manual installation, standalone packages are also available on [GitHub Releases](https://github.com/fuliez/ProbablyStolen-DragAwareHotkeys/releases): close the game and extract the archive's `drag_aware_hotkeys/` folder into the game's `Mods/` directory. Packages contain only the mod DLL and `manifest.xml`; do not copy the source repository into Mods.
+For manual installation, standalone packages are also available on [GitHub Releases](https://github.com/fuliez/ProbablyStolen-DragAwareHotkeys/releases): close the game and extract the archive's `drag_aware_hotkeys/` folder into the game's `Mods/` directory. Packages contain only the mod DLL, `manifest.xml` and the in-game cover `preview.png`; do not copy the source repository into Mods.
 
 Disable and restart to restore vanilla behavior. To uninstall, unsubscribe or close the game and remove the local `Mods/drag_aware_hotkeys` folder. A local copy with the same mod ID takes priority over the Workshop copy. Restart after rebuilding or updating; local Developer mode in the Mods menu can reduce repeated trust prompts during development.
 

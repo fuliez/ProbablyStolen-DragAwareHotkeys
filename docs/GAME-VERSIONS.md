@@ -9,7 +9,7 @@
 | 游戏内部 `Application.version` | **0.46D**；本机 Mod 菜单也据此匹配 | 当前 manifest 的 `GameVersions` 仅声明此标识 |
 | Steam `open_beta` | build **26556045**；开发者文档将 **100-Rev14 / 1.0.0.14** 标为 beta | 未安装、未验证，不声明兼容 |
 | 图一 Battery Manager 的 `1.1.0` | 位于“模组版本”栏，属于该 Mod | 不是 Probably Stolen 的游戏版本，撤回此前推断 |
-| 本 Mod 版本 | **0.1.5** | 独立于游戏版本的项目版本号 |
+| 本 Mod 版本 | **0.1.6** | 独立于游戏版本的项目版本号 |
 
 ## 一手依据
 
@@ -27,4 +27,4 @@
 
 ## English summary
 
-As checked on 2026-11-11, the public branch is **100-Rev13 / 1.0.0.13, build 26525552**, matching the installed and tested game. That build's Mod menu still uses the legacy **0.46D** runtime identifier, so the manifest declares only 0.46D. The **1.1.0** in the supplied Battery Manager screenshot is that mod's own version, not the game version. The developer's **100-Rev14 / 1.0.0.14** is on beta (build 26556045) and is not claimed as tested. Our mod's own version is **0.1.5**. Sources and the normalization-based mapping are recorded above.
+As checked on 2026-11-11, the public branch is **100-Rev13 / 1.0.0.13, build 26525552**, matching the installed and tested game. That build's Mod menu still uses the legacy **0.46D** runtime identifier, so the manifest declares only 0.46D. The **1.1.0** in the supplied Battery Manager screenshot is that mod's own version, not the game version. The developer's **100-Rev14 / 1.0.0.14** is on beta (build 26556045) and is not claimed as tested. Our mod's own version is **0.1.6**. Sources and the normalization-based mapping are recorded above.

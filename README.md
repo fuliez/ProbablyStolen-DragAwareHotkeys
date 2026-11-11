@@ -6,7 +6,7 @@
 
 | 项目 | 状态 |
 | --- | --- |
-| Mod 版本 | **0.1.5** |
+| Mod 版本 | **0.1.6** |
 | 作者 | **fuliezi** |
 | 已实测游戏 | 正式版 **100-Rev13 / 1.0.0.13**，build **26525552** |
 | 菜单兼容标识 | **0.46D**（该正式构建沿用的内部版本号） |
@@ -25,7 +25,7 @@
 
 推荐通过 [Steam 创意工坊](https://steamcommunity.com/sharedfiles/filedetails/?id=3837800051)订阅、获取更新和反馈问题。订阅后，在游戏 Mods 菜单启用本 Mod、检查权限并重启游戏。
 
-手动安装也可使用 [GitHub Releases](https://github.com/fuliez/ProbablyStolen-DragAwareHotkeys/releases) 中的独立安装包：先关闭游戏，再将压缩包内的 `drag_aware_hotkeys/` 文件夹放入游戏的 `Mods/` 目录。安装包仅含 Mod DLL 和 `manifest.xml`，请勿将整个源码仓库复制到 Mods。
+手动安装也可使用 [GitHub Releases](https://github.com/fuliez/ProbablyStolen-DragAwareHotkeys/releases) 中的独立安装包：先关闭游戏，再将压缩包内的 `drag_aware_hotkeys/` 文件夹放入游戏的 `Mods/` 目录。安装包仅含 Mod DLL、`manifest.xml` 和游戏内封面 `preview.png`，请勿将整个源码仓库复制到 Mods。
 
 停用并重启可恢复原版行为。卸载时取消工坊订阅，或关闭游戏后移除本地 `Mods/drag_aware_hotkeys` 文件夹。相同 Mod ID 的本地副本优先于工坊副本；重新构建或更新后需重启，开发期间可用 Mods 菜单的本地 Developer mode 减少重复授权提示。
 
