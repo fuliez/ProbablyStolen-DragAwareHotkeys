@@ -36,7 +36,7 @@ The contract executable checks 10 lifecycle/state/failure outcomes in each confi
 - Offline Workshop safeguards: passed under PowerShell 7 and Windows PowerShell 5.1. Real preparation/build/package also passed under 5.1 after adding explicit UTF-8 reads.
 - Installed 0.1.1 into Mods/drag_aware_hotkeys with the game closed. Corrected manifest declares 1.1.0 and the bilingual display name; updated menu appearance awaits the owner's visual confirmation.
 - Release DLL SHA-256: `7341770A95DE11999F0AD96DACF699790AA86DF8B98AE3BFC5CBA07BBEC982B9`.
-- First hidden Workshop upload completed; Steam returned item ID 3837800051. VDF preserves visibility 2 and the bilingual title. The owner confirmed the page loads without a legal-agreement prompt. Their description feedback was fixed and uploaded to the same hidden item; final refreshed-page confirmation remains pending.
+- First hidden Workshop upload completed; Steam returned item ID 3837800051. VDF preserves visibility 2 and the bilingual title. The owner confirmed the page loads without a legal-agreement prompt. Their description feedback was fixed and uploaded to the same hidden item; the owner subsequently confirmed the description is displayed correctly.
 - [Public GitHub Release](https://github.com/fuliez/ProbablyStolen-DragAwareHotkeys/releases/tag/v0.1.1) uploaded with runtime ZIP and SHA256SUMS.txt; downloaded ZIP verified against that checksum. ZIP timestamps may differ between later local packaging runs.
 
 ## Manual matrix
@@ -76,3 +76,7 @@ For debugging install `-Configuration Debug` and inspect the transition logs. Do
 - [x] 停用 Mod 并重启，再卸载并重启：原版行为恢复，且没有存档迁移或数据缺失错误。
 
 调试时可使用 `-Configuration Debug` 安装，并查看拖拽状态切换日志。不要提交原始 `Player.log`，其中可能含有本机路径和其他 Mod 的数据。若已启用开发工具，还可使用游戏内的 `mod-scan drag_aware_hotkeys` 进行额外检查。上述记录表示官方版本功能验收通过；创意工坊实际下载与交付验证需要另行完成。
+
+### 0.1.2 display-title update
+
+Metadata-only maintenance update: exact name is Drag-Aware Hotkeys_解决拖拽时按键冲突. Input source is unchanged from the accepted 0.1.1 implementation; supported official game remains 1.1.0. The owner confirmed the earlier Workshop description corrections before requesting this title refinement.

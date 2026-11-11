@@ -12,7 +12,7 @@ Rotate a dragged item without accidentally triggering Storage Coordinator contai
 Subscribe, enable this mod in the game's Mods menu, review permissions and restart the game. No prerequisite mod is required. Disable and restart to restore vanilla behavior; unsubscribe or remove the local mod folder to uninstall.
 
 [h2]Version and compatibility[/h2]
-Mod version: 0.1.1. Supported official game version: 1.1.0. The owner completed official-game acceptance with no bugs reported. This update only corrects compatibility metadata and the display name; input handling is unchanged from 0.1.0.
+Mod version: 0.1.2. Supported official game version: 1.1.0. The owner completed official-game acceptance with no bugs reported. This update only corrects compatibility metadata and the display name; input handling is unchanged from 0.1.0.
 Support is scoped to the official game; third-party mod compatibility is not promised. This mod applies a single Harmony prefix to the Storage Coordinator hotkey handler; mods that change the same method may conflict.
 
 [h2]Saves and permissions[/h2]

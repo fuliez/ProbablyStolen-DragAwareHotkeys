@@ -8,7 +8,7 @@ Create the open-source project **ProbablyStolen-DragAwareHotkeys** inside `my_mo
 
 ## Completed implementation
 
-- Independent Git repository on main. MIT license, bilingual documentation, SemVer 0.1.1, changelog, Codex rules and CI. GitHub delivery status is recorded below.
+- Independent Git repository on main. MIT license, bilingual documentation, SemVer 0.1.2, changelog, Codex rules and CI. GitHub delivery status is recorded below.
 - Native IMod entry; one automatic Harmony prefix on private static `MachineStorageCoordinator.HandleHotkeys`. Checks public `ItemMouseDragHandler.current.IsDraggingItem` with Unity null comparison. No native cancellation hook exists in inspected build. All actual API evidence is in docs/API-INVESTIGATION.md.
 - Enabled flag, Release lifecycle logs, Debug drag-transition logs, fail-open state-read exception handling with once-per-enable warning. No file/save/network APIs in runtime DLL, empty capabilities.
 - Root build/install/package/publish-workshop PowerShell scripts. Configuration via parameter/env/ignored JSON. Exact DLL + manifest packaging. Upload defaults to preparation; explicit hidden upload flags required. Preserves/recover Workshop ID, refuses duplicate creation after uncertain upload.
@@ -72,7 +72,7 @@ Read AGENTS.md before editing; do not include local absolute paths or private lo
 - The authorized first hidden upload completed successfully. SteamCMD returned publishedfileid **3837800051**; .local/workshop/upload-result.json reports finished. The returned VDF retains appid 4348910, visibility 2 and the correct bilingual title. Public Workshop visibility remains unauthorized. The anonymous metadata API returns result 9 (not accessible). The owner subsequently confirmed the page loads normally and there is no legal-agreement prompt.
 
 - Workshop identity is now tracked in workshop/item.json (App ID and item ID only; no local paths or login state). Publisher prefers this identity, rejects conflicting local IDs and refuses NewItem for this project, even in a fresh clone. First-creation, recovery, fresh-clone and conflicting-state tests pass under PowerShell 7 and 5.1. Future updates must omit -NewItem.
-- Workshop owner page: https://steamcommunity.com/sharedfiles/filedetails/?id=3837800051 . The owner confirmed the page loads with no legal-agreement problem. Their reported description formatting issues were corrected in the update below; final refreshed-page confirmation remains pending. Do not change visibility to public without explicit authorization.
+- Workshop owner page: https://steamcommunity.com/sharedfiles/filedetails/?id=3837800051 . The owner confirmed the page loads with no legal-agreement problem. Their reported description formatting issues were corrected in the update below; the owner subsequently confirmed the description fixes display correctly. Do not change visibility to public without explicit authorization.
 
 ## Workshop description correction — 2026-11-11
 
@@ -81,4 +81,11 @@ Read AGENTS.md before editing; do not include local absolute paths or private lo
 - Rewrote Chinese/English descriptions with matching feature, install/uninstall, compatibility, saves/permissions and source/feedback sections. Chinese appears first, followed by English. Both link repository, Releases and Issues. Description is 3393 UTF-8 bytes, below the checked 8000-byte limit.
 - Added regression checks for literal newlines, language order, bilingual section/bullet/link parity and repository link. All pass under PowerShell 7 and Windows PowerShell 5.1.
 - Successfully updated existing item **3837800051** using the saved/tracked identity, omitting NewItem. Local upload result reports finished at 2026-11-11T10:59:46Z. Visibility remains 2 (hidden). Runtime files and public GitHub Release 0.1.1 are unchanged; only publishing text/tooling changed.
-- Await the owner's final refreshed-page confirmation. Do not make Workshop public without a separate explicit instruction.
+- The owner confirmed the corrected description now displays normally; no further description issues were reported. Do not make Workshop public without a separate explicit instruction.
+
+## Display-title refinement — 2026-11-11
+
+- The owner confirmed the previous Workshop description corrections and requested replacing parentheses with an underscore in the title. New exact display name: **Drag-Aware Hotkeys_解决拖拽时按键冲突**.
+- Apply as metadata-only version 0.1.2 across manifest, README and Workshop title/description. Input source and official game 1.1.0 support are unchanged. Preserve immutable 0.1.1 tag and published assets; use a separate 0.1.2 package/tag. Update the same Workshop item 3837800051 with visibility 2; public Workshop visibility remains unauthorized.
+
+- 0.1.2 Release build, installed-game signature/scanner (14 methods, no capabilities/hard flags/refusals/errors), offline publisher checks and repository checks passed. Installed locally with game closed. Hidden update finished successfully at 2026-11-11T11:04:30Z; returned VDF and state retain item 3837800051 with exact underscore title and visibility 2. GitHub 0.1.2 package/tag follows this maintenance commit; do not rewrite 0.1.1 assets or tag.

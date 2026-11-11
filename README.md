@@ -1,8 +1,8 @@
-# Drag-Aware Hotkeys（解决拖拽时按键冲突）
+# Drag-Aware Hotkeys_解决拖拽时按键冲突
 
 A small native-loader mod for **Probably Stolen**: Storage Coordinator shortcuts are ignored while an item is being dragged. Item rotation (including Q/E), flipping, and placement stay with the game. When no item is being dragged, storage shortcuts work normally.
 
-**Version 0.1.1 — targets official game version 1.1.0. The owner reports completed in-game acceptance with no bugs found.** No save edits or replacement game assemblies. Support is scoped to the official game; third-party mod compatibility is not promised. Uses the game's own Harmony library.
+**Version 0.1.2 — targets official game version 1.1.0. The owner reports completed in-game acceptance with no bugs found.** No save edits or replacement game assemblies. Support is scoped to the official game; third-party mod compatibility is not promised. Uses the game's own Harmony library.
 
 ## Build and install
 
@@ -45,7 +45,7 @@ The local repository starts on `main` and uses Semantic Versioning and Conventio
 
 拖动物品时，屏蔽储物协调器的全部容器快捷键；未拖动时恢复正常。Q/E 旋转、翻转、放置仍由游戏处理。仅支持官方游戏版本，不承诺与第三方 Mod 兼容。不修改存档、不覆盖原始程序集，只通过游戏原生 Mod 加载器应用一个小范围 Harmony 前置补丁。
 
-当前 **0.1.1 适配官方游戏 1.1.0**，项目所有者已反馈完成游戏内验收，未发现问题。构建、安装、打包命令见上方。安装后请在 Mods 菜单启用并重启；先按[测试清单](docs/TESTING.md)验证功能。项目所有者已授权创建公开 GitHub 仓库及首次隐藏上传；交付状态见 agent.md，创意工坊改为公开仍需另行授权。请保管 `.local/workshop/` 中返回的物品 ID，后续只更新该物品。
+当前 **0.1.2 适配官方游戏 1.1.0**，项目所有者已反馈完成游戏内验收，未发现问题。构建、安装、打包命令见上方。安装后请在 Mods 菜单启用并重启；先按[测试清单](docs/TESTING.md)验证功能。项目所有者已授权创建公开 GitHub 仓库及首次隐藏上传；交付状态见 agent.md，创意工坊改为公开仍需另行授权。请保管 `.local/workshop/` 中返回的物品 ID，后续只更新该物品。
 
 ## References and license
 

@@ -52,5 +52,5 @@ After testing a new version, update changelog/version, commit, tag, publish the 
 ## Current delivery record
 
 - [Public GitHub Release v0.1.1](https://github.com/fuliez/ProbablyStolen-DragAwareHotkeys/releases/tag/v0.1.1) is published with runtime ZIP and checksum file.
-- First hidden Workshop upload completed: item 3837800051, app 4348910, submitted visibility 2. Local result and returned VDF confirm success and saved identity. The owner confirmed the page loads and has no legal-agreement prompt. The subsequent description correction updated this same item successfully; final refreshed-page presentation confirmation remains pending. Anonymous queries cannot view this hidden item.
+- First hidden Workshop upload completed: item 3837800051, app 4348910, submitted visibility 2. Local result and returned VDF confirm success and saved identity. The owner confirmed the page loads and has no legal-agreement prompt. The subsequent description correction updated this same item successfully; the owner confirmed the description corrections display properly. Anonymous queries cannot view this hidden item.
 - Public Workshop visibility is not authorized. Updating through this script retains hidden visibility.

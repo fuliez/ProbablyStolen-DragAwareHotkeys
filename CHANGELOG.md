@@ -8,6 +8,13 @@ All notable changes are recorded here. Versions follow Semantic Versioning.
 - Keep the created Workshop identity in source control and reject conflicting local state, so fresh clones update the existing item.
 - Fix literal backslash-n text in Workshop descriptions by writing actual multiline VDF strings; place Chinese first, align both translations and add repository, release and issue links.
 
+## [0.1.2] - 2026-11-11
+
+### Changed
+
+- Rename the game and Workshop display title to Drag-Aware Hotkeys_解决拖拽时按键冲突, replacing the parentheses with an underscore.
+- Input behavior and official game 1.1.0 compatibility are unchanged.
+
 ## [0.1.1] - 2026-11-11
 
 ### Fixed
