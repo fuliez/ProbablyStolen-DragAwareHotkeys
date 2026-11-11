@@ -110,3 +110,5 @@ Remove the false 1.1.0 GameVersions entry and keep only 0.46D. Official Steam ne
 ### 0.1.5 author and in-game description
 
 Metadata-only update: author is fuliezi across current credits and package metadata. Manifest Description contains equivalent Chinese first, a blank line, then English. Check installed/package/source XML bytes and parsed text order; after restarting, confirm the game displays author fuliezi and both paragraphs. Input behavior and GameVersions are unchanged.
+
+- 0.1.5 verification passed: actual-game API/scanner and runtime normalization; zero-warning Release build; parsed XML author and real Chinese-first/English-second paragraphs; identical source/package/installed manifest; assembly company/copyright values fuliezi; matching bilingual README commands. Published GitHub ZIP checksum verified and existing public Workshop item confirms version and bilingual author credits. Actual post-restart menu display remains pending owner confirmation.
