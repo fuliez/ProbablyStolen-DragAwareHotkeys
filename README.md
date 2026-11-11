@@ -6,8 +6,8 @@
 
 | 项目 | 状态 |
 | --- | --- |
-| Mod 版本 | **0.1.2** |
-| 适配游戏 | 官方 **1.1.0** |
+| Mod 版本 | **0.1.3** |
+| 适配游戏 | 官方 **1.1.0**；同时声明此构建内部标识 **0.46D** |
 | 验收状态 | 项目所有者已完成官方版本游戏内验收，未发现明显问题 |
 | 支持范围 | 官方游戏；不承诺与第三方 Mod 兼容 |
 
@@ -46,7 +46,7 @@ $env:PROBABLY_STOLEN_GAME_DIR = (Resolve-Path '..').Path
 dotnet run --project tests/Contracts/Contracts.csproj -c Release
 ./scripts/check.ps1
 ./tests/Workshop.ps1
-./scripts/check-game.ps1
+./scripts/check-game.ps1 -ReportedGameVersion '0.46D'
 ./install-local.ps1 -Configuration Debug
 ```
 

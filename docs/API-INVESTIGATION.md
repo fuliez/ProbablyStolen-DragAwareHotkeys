@@ -49,3 +49,11 @@ Better Key Bindings reads the same public drag property for rotation contexts, b
 - [Better Key Bindings source](https://github.com/KCN-judu/ProbablyStolen-BetterKeyBindings/blob/main/src/Bindings.cs): input scope and public drag-state use.
 
 Local installed assemblies are authoritative where the latest guide differs.
+
+## 0.1.3 correction: runtime compatibility identifiers
+
+The owner's screenshot and current Player.log establish that the local 0.1.2 mod runs, but the menu warns that it is not made for game version **0.46D**. The earlier decision to keep only the owner-reported 1.1.0 label was incomplete: Application.version is authoritative for this build's menu matching even when it differs from the release label.
+
+Inspected ModUIManager.VersionMatchesGame normalizes its argument and Application.version to a leading numeric/dot prefix, then accepts equal or compatible dot-prefix values. GetModIssue adds the version warning only when no declared GameVersions entry matches. Thus 0.46D normalizes to 0.46 and exactly matches the runtime value; 1.1.0 alone cannot match. The 0.1.3 manifest retains 1.1.0 and adds 0.46D without modifying the game or its UI.
+
+The development harness can call the installed game's actual private, pure NormalizeVersion method without accessing Unity's native Application.version getter. Run scripts/check-game.ps1 -ReportedGameVersion 0.46D with the reported value explicitly supplied. It verifies that at least one packaged manifest entry produces the same normalized value, which guarantees the equality branch of the inspected matcher. The old manifest failed this check as expected. This is a headless check; actual post-restart menu appearance still requires observation. The old UI colors each entry separately, so 1.1.0 can remain red while 0.46D is green and the overall warning is cleared.

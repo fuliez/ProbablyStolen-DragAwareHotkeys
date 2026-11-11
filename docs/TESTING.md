@@ -89,3 +89,9 @@ Metadata-only maintenance update: exact name is Drag-Aware Hotkeys_解决拖拽�
 - Publisher controls passed offline tests under PowerShell 7 and 5.1: first creation cannot be public, public updates need UPLOAD PUBLIC confirmation, configured visibility is preserved, and the existing ID is retained.
 - Public update finished successfully. Anonymous Steam metadata returned result=1, visibility=0, item=3837800051, consumer_app_id=4348910 and the exact underscore title. Full verification is saved locally under ignored .local/workshop/public-verification.json.
 - No runtime changes: version remains 0.1.2. Published runtime packages and tags are preserved.
+
+### 0.1.3 runtime-version declaration regression
+
+- Before the fix: scripts/check-game.ps1 -ReportedGameVersion 0.46D failed using the installed game's actual NormalizeVersion method, confirming the old declaration did not match.
+- Fix: retain 1.1.0 and add 0.46D to the manifest. The local screenshot/current log identify 0.46D as this build's reported runtime version; the menu normalizes it to 0.46.
+- This check guarantees an exact normalized match for the inspected menu algorithm without calling native Unity APIs outside the game. After restart, confirm the overall warning icon is gone. The older menu may still color 1.1.0 red individually; 0.46D should be green. That per-entry display is expected.

@@ -4,6 +4,17 @@ All notable changes are recorded here. Versions follow Semantic Versioning.
 
 ## [Unreleased]
 
+- No changes yet.
+
+## [0.1.3] - 2026-11-11
+
+### Fixed
+
+- Declare the installed build's runtime version 0.46D alongside the owner-reported 1.1.0 release label, fixing the overall Mods-menu version-mismatch warning without changing the input patch.
+- Add an installed-game normalization check using the actual ModUIManager method and an explicitly supplied reported game version; reproduce the old mismatch and verify the fixed manifest.
+
+### Included publishing and documentation improvements
+
 - Align Chinese/English README content with Chinese as the default and local language-switch buttons.
 - Limit the Workshop Source section to the repository link; keep downloads and feedback on Steam.
 - Support explicitly confirmed public updates for the existing Workshop item while forcing first creations to remain hidden.

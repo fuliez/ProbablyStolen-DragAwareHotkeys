@@ -8,7 +8,7 @@ Create the open-source project **ProbablyStolen-DragAwareHotkeys** inside `my_mo
 
 ## Completed implementation
 
-- Independent Git repository on main. MIT license, bilingual documentation, SemVer 0.1.2, changelog, Codex rules and CI. GitHub delivery status is recorded below.
+- Independent Git repository on main. MIT license, bilingual documentation, SemVer 0.1.3, changelog, Codex rules and CI. GitHub delivery status is recorded below.
 - Native IMod entry; one automatic Harmony prefix on private static `MachineStorageCoordinator.HandleHotkeys`. Checks public `ItemMouseDragHandler.current.IsDraggingItem` with Unity null comparison. No native cancellation hook exists in inspected build. All actual API evidence is in docs/API-INVESTIGATION.md.
 - Enabled flag, Release lifecycle logs, Debug drag-transition logs, fail-open state-read exception handling with once-per-enable warning. No file/save/network APIs in runtime DLL, empty capabilities.
 - Root build/install/package/publish-workshop PowerShell scripts. Configuration via parameter/env/ignored JSON. Exact DLL + manifest packaging. Upload defaults to preparation; explicit confirmation matching Hidden/Public visibility is required. Preserves/recover Workshop ID, refuses duplicate creation after uncertain upload.
@@ -103,3 +103,12 @@ Read AGENTS.md before editing; do not include local absolute paths or private lo
 - Public player page: https://steamcommunity.com/sharedfiles/filedetails/?id=3837800051 . The item remains the original item; do not recreate it. Future updates preserve configured Public visibility and require UPLOAD PUBLIC confirmation. Password/Guard input stays interactive and outside the repository.
 - GitHub main now serves Chinese README.md by default. README.en.md provides the equivalent complete English content; both have local SVG language buttons. Checked eight-section parity, matching command blocks/link targets, and local destinations. GitHub API confirms default README.md and its rendered HTML includes the English button and Chinese body.
 - GitHub source commit 402bea4 includes the README, source-only descriptions and public-upload controls. Local PowerShell 7/5.1 checks passed. Final CI status is reported with the task result. Runtime is still 0.1.2; no new package version or published tag rewrite is needed for these documentation/description changes.
+
+## 0.1.3 compatibility-warning fix — 2026-11-11
+
+- User supplied an actual Mods-menu screenshot showing 1.1.0 in red and a warning against running game 0.46D. Current Player.log confirms the local 0.1.2 mod initialized with running=True, so this was a metadata warning, not patch failure. Do not copy raw logs into Git.
+- Root cause: the previous metadata change discarded the runtime identifier based on the release label. Installed ModUIManager actually compares GameVersions to Application.version. Retain both 1.1.0 and 0.46D; do not remove the latter as merely stale. Overall warning uses Any(match), while individual entries are independently colored.
+- Added an optional ReportedGameVersion argument to the development harness. It invokes the actual installed NormalizeVersion method and requires an exact normalized manifest match. Reproduced failure with old 0.1.2 manifest for 0.46D before applying the alias fix. No game source is copied and no game methods are patched by this check.
+- Metadata-only version 0.1.3; input source unchanged. Updated bilingual README, Workshop descriptions and changelog. Preserve prior release tags/packages; update existing public item 3837800051 only. Visual post-restart confirmation remains pending until actually observed.
+
+- Validation after the fix passed for both explicitly reported values 0.46D and 1.1.0 using the real installed normalizer. Actual-game scanner: 14 methods, no capabilities/hard flags/refusals/errors. Release and Debug builds and 10 behavioral checks per configuration passed. Offline publication checks, README parity and script checks passed; the game-version regression also passed under Windows PowerShell 5.1. Installed 0.1.3 locally while the game was closed; package contains the fixed manifest. Actual restarted menu appearance is still pending owner observation.

@@ -3,9 +3,12 @@
   <ID>drag_aware_hotkeys</ID>
   <Name>Drag-Aware Hotkeys_解决拖拽时按键冲突</Name>
   <Author>ProbablyStolen-DragAwareHotkeys contributors</Author>
-  <ModVersion>0.1.2</ModVersion>
+  <ModVersion>0.1.3</ModVersion>
   <Description>Block Storage Coordinator hotkeys while dragging items. Keep rotation and normal storage shortcuts.</Description>
-  <GameVersions><Version>1.1.0</Version></GameVersions>
+  <GameVersions>
+    <Version>1.1.0</Version>
+    <Version>0.46D</Version>
+  </GameVersions>
   <Prerequisites />
   <Assemblies><Assembly>ProbablyStolen.DragAwareHotkeys.dll</Assembly></Assemblies>
   <Capabilities />

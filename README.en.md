@@ -6,8 +6,8 @@ A lightweight mod for *Probably Stolen*: suppress Storage Coordinator container 
 
 | Item | Status |
 | --- | --- |
-| Mod version | **0.1.2** |
-| Supported game | Official **1.1.0** |
+| Mod version | **0.1.3** |
+| Supported game | Official **1.1.0**; also declares this build's internal identifier **0.46D** |
 | Acceptance | The owner completed official-game acceptance with no obvious issues reported |
 | Support scope | Official game; third-party mod compatibility is not promised |
 
@@ -46,7 +46,7 @@ Alternatively pass `-GameDir`, or copy `config.example.json` to ignored `config.
 dotnet run --project tests/Contracts/Contracts.csproj -c Release
 ./scripts/check.ps1
 ./tests/Workshop.ps1
-./scripts/check-game.ps1
+./scripts/check-game.ps1 -ReportedGameVersion '0.46D'
 ./install-local.ps1 -Configuration Debug
 ```
 
