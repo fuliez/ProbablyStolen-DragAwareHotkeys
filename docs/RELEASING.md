@@ -60,6 +60,7 @@ Do not change visibility without the owner's authorization. Confirm the returned
 
 ## Current delivery record
 
-- [Public GitHub Release v0.1.1](https://github.com/fuliez/ProbablyStolen-DragAwareHotkeys/releases/tag/v0.1.1) is published with runtime ZIP and checksum file.
-- First hidden Workshop upload completed: item 3837800051, app 4348910, submitted visibility 2. Local result and returned VDF confirm success and saved identity. The owner confirmed the page loads and has no legal-agreement prompt. The subsequent description correction updated this same item successfully; the owner confirmed the description corrections display properly. Anonymous queries cannot view this hidden item.
-- Public Workshop visibility was subsequently authorized for the existing item after the README/description revision. See agent.md for verified publication results.
+- [Public GitHub Release v0.1.2](https://github.com/fuliez/ProbablyStolen-DragAwareHotkeys/releases/tag/v0.1.2) contains the current runtime ZIP and checksum file; previous releases remain available.
+- [Steam Workshop item 3837800051](https://steamcommunity.com/sharedfiles/filedetails/?id=3837800051) is PUBLIC after explicit owner authorization. Anonymous metadata verification returned result=1, visibility=0 and consumer_app_id=4348910, with the correct underscore title and source-only bilingual description. The item ID is unchanged from the original hidden creation.
+- README.md is the Chinese repository homepage; README.en.md provides the equivalent English version with language buttons in both. Workshop subscriptions, updates and feedback use Steam; its Source section only links the repository.
+- Runtime remains 0.1.2; these documentation and publishing changes do not replace released runtime artifacts or tags. The latest verification record is in agent.md.

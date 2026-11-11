@@ -80,3 +80,12 @@ For debugging install `-Configuration Debug` and inspect the transition logs. Do
 ### 0.1.2 display-title update
 
 Metadata-only maintenance update: exact name is Drag-Aware Hotkeys_解决拖拽时按键冲突. Input source is unchanged from the accepted 0.1.1 implementation; supported official game remains 1.1.0. The owner confirmed the earlier Workshop description corrections before requesting this title refinement.
+
+### Public publication and bilingual README — 2026-11-11
+
+- The owner confirmed no obvious remaining issues and explicitly authorized making the existing Workshop item public.
+- README.md is the Chinese default and README.en.md is its full English counterpart. Eight sections, command blocks, link targets and local language-button destinations were checked for parity. GitHub's README endpoint selects README.md; GitHub's renderer includes the English SVG button and Chinese body.
+- Both Workshop descriptions now end with Source/源码 and only the repository link. The source-only content, Chinese-first order and real line breaks were verified from Steam's returned metadata.
+- Publisher controls passed offline tests under PowerShell 7 and 5.1: first creation cannot be public, public updates need UPLOAD PUBLIC confirmation, configured visibility is preserved, and the existing ID is retained.
+- Public update finished successfully. Anonymous Steam metadata returned result=1, visibility=0, item=3837800051, consumer_app_id=4348910 and the exact underscore title. Full verification is saved locally under ignored .local/workshop/public-verification.json.
+- No runtime changes: version remains 0.1.2. Published runtime packages and tags are preserved.
