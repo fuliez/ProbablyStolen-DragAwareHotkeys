@@ -6,7 +6,7 @@ foreach ($file in Get-ChildItem -LiteralPath $ProjectRoot -Filter '*.ps1' -File 
     [System.Management.Automation.Language.Parser]::ParseFile($file.FullName, [ref]$tokens, [ref]$errors) | Out-Null
     if ($errors.Count) { $errors | Write-Host; $failed = $true }
 }
-[xml]$manifest = Get-Content (Join-Path $ProjectRoot 'mod/manifest.xml') -Raw
+[xml]$manifest = Get-Content (Join-Path $ProjectRoot 'mod/manifest.xml') -Raw -Encoding utf8
 if ($manifest.Manifest.ModVersion -ne (Get-ModVersion)) { throw 'Manifest version mismatch.' }
 if ($failed) { throw 'PowerShell syntax errors.' }
 & git -C $ProjectRoot diff --check

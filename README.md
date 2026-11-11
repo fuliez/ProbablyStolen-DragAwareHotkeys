@@ -39,7 +39,7 @@ See [investigation](docs/API-INVESTIGATION.md), [manual tests](docs/TESTING.md),
 
 The local repository starts on `main` and uses Semantic Versioning and Conventional Commits. Source and issue tracking: [fuliez/ProbablyStolen-DragAwareHotkeys](https://github.com/fuliez/ProbablyStolen-DragAwareHotkeys). The owner authorized the first hidden Workshop upload. See agent.md for delivery status. Public Workshop visibility still requires separate authorization.
 
-`publish-workshop.ps1` prepares a hidden (`visibility=2`) SteamCMD VDF by default and does not start SteamCMD. Its ignored `.local/workshop/` folder preserves the item ID. It intentionally has no public visibility option. See [release instructions](docs/RELEASING.md) before any upload.
+`publish-workshop.ps1` prepares a hidden (`visibility=2`) SteamCMD VDF by default and does not start SteamCMD. The first hidden upload is complete. The non-sensitive item identity is committed in workshop/item.json, with local recovery state under ignored `.local/workshop/`; future uploads update this item and reject `-NewItem`. It intentionally has no public visibility option. See [release instructions](docs/RELEASING.md) before any upload.
 
 ## 中文说明
 

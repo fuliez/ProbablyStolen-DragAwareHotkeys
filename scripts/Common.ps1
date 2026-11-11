@@ -4,7 +4,7 @@ $script:ProjectRoot = Split-Path $PSScriptRoot -Parent
 function Get-LocalSetting([string]$Name) {
     $path = Join-Path $script:ProjectRoot 'config.local.json'
     if (Test-Path -LiteralPath $path) {
-        $config = Get-Content -LiteralPath $path -Raw | ConvertFrom-Json
+        $config = Get-Content -LiteralPath $path -Raw -Encoding utf8 | ConvertFrom-Json
         if ($config.PSObject.Properties.Name -contains $Name) { return [string]$config.$Name }
     }
     return ''
@@ -20,7 +20,7 @@ function Resolve-GameDir([string]$GameDir) {
     return $resolved
 }
 function Get-ModVersion {
-    [xml]$props = Get-Content (Join-Path $script:ProjectRoot 'Directory.Build.props') -Raw
+    [xml]$props = Get-Content (Join-Path $script:ProjectRoot 'Directory.Build.props') -Raw -Encoding utf8
     return [string]$props.Project.PropertyGroup.Version
 }
 function Assert-RuntimeFolder([string]$Path, [switch]$AllowOlderVersion) {
@@ -29,6 +29,6 @@ function Assert-RuntimeFolder([string]$Path, [switch]$AllowOlderVersion) {
     if ($actual.Count -ne 2 -or @($actual | Where-Object { $_.PSIsContainer -or $_.Name -notin $expected }).Count -gt 0) {
         throw 'Runtime folder must contain exactly the manifest and mod DLL.'
     }
-    [xml]$manifest = Get-Content (Join-Path $Path 'manifest.xml') -Raw
+    [xml]$manifest = Get-Content (Join-Path $Path 'manifest.xml') -Raw -Encoding utf8
     if ($manifest.Manifest.ID -ne 'drag_aware_hotkeys' -or (!$AllowOlderVersion -and $manifest.Manifest.ModVersion -ne (Get-ModVersion))) { throw 'Manifest id/version mismatch.' }
 }

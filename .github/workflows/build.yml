@@ -18,6 +18,11 @@ jobs:
       - name: Check Workshop safeguards offline
         shell: pwsh
         run: ./tests/Workshop.ps1
+      - name: Check UTF-8 metadata with Windows PowerShell 5.1
+        shell: powershell
+        run: |
+          ./tests/Workshop.ps1
+          ./scripts/check.ps1
   # Full builds require legally obtained installed game references. Do not upload them.
   # A manually started job can use a private self-hosted machine; never run untrusted PRs there.
   game-build:

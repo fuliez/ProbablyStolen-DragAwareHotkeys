@@ -17,7 +17,7 @@ The contract executable checks 10 lifecycle/state/failure outcomes in each confi
 
 `tests/Workshop.ps1` uses a separate fixture under ignored `.local/publisher-tests/`, a fake packager and fake SteamCMD. It verifies default preparation, required explicit confirmation, hidden visibility, saved identity, update instead of duplicate creation, VDF recovery, and blocked retries after uncertain creation. No network upload occurs; its synthetic ID is not a real Workshop item.
 
-### Recorded local results — 2026-11-11
+### Initial 0.1.0 local results — 2026-11-11
 
 - Release and Debug actual-reference builds: passed, 0 warnings/errors.
 - Release and Debug contract checks: 10 passed each.
@@ -27,6 +27,17 @@ The contract executable checks 10 lifecycle/state/failure outcomes in each confi
 - Clean rebuild produced identical Release DLL SHA-256: `E38EA105C93C59DF31FE2C709269E312F1F94F2BB233D8767DC156816238372C`.
 - ZIP inspected: exactly `drag_aware_hotkeys/manifest.xml` and `drag_aware_hotkeys/ProbablyStolen.DragAwareHotkeys.dll` (6144 bytes).
 - Real hidden VDF prepared with App ID 4348910, visibility 2, item ID 0. No upload or local installation performed.
+
+### 0.1.1 results — 2026-11-11
+
+- Official game 1.1.0 manual acceptance: passed according to the owner; third-party mod coexistence is excluded from scope. Input logic is unchanged from 0.1.0.
+- Actual-reference Release/Debug builds: passed with no warnings/errors; both sets of 10 contract checks passed.
+- Actual-game API signatures and scanner: passed (14 methods, no capabilities, hard flags, refusals or errors).
+- Offline Workshop safeguards: passed under PowerShell 7 and Windows PowerShell 5.1. Real preparation/build/package also passed under 5.1 after adding explicit UTF-8 reads.
+- Installed 0.1.1 into Mods/drag_aware_hotkeys with the game closed. Corrected manifest declares 1.1.0 and the bilingual display name; updated menu appearance awaits the owner's visual confirmation.
+- Release DLL SHA-256: `7341770A95DE11999F0AD96DACF699790AA86DF8B98AE3BFC5CBA07BBEC982B9`.
+- First hidden Workshop upload completed; Steam returned item ID 3837800051. VDF preserves visibility 2 and the bilingual title. Owner-authenticated page/cover/agreement confirmation remains pending.
+- [Public GitHub Release](https://github.com/fuliez/ProbablyStolen-DragAwareHotkeys/releases/tag/v0.1.1) uploaded with runtime ZIP and SHA256SUMS.txt; downloaded ZIP verified against that checksum. ZIP timestamps may differ between later local packaging runs.
 
 ## Manual matrix
 

@@ -26,7 +26,7 @@ The ignored `.local/workshop/item.vdf` contains `appid=4348910`, runtime content
 
 ## Explicitly authorized first upload
 
-Only after the owner approves an upload:
+The first hidden upload has already completed for this project (item ID in workshop/item.json). The following first-creation command is retained as historical documentation and is now rejected for this project. Do not remove the tracked identity to bypass that protection. For normal updates, omit -NewItem. On a genuinely new independent project, first creation requires explicit owner approval:
 
 ```powershell
 ./publish-workshop.ps1 -Upload -NewItem -ConfirmUpload 'UPLOAD HIDDEN' `
@@ -35,7 +35,7 @@ Only after the owner approves an upload:
 
 The script passes only the account name; SteamCMD handles password/Steam Guard interactively. Do not add a password parameter, unattended login config, credentials file, transcript or credential logging. SteamCMD's own account/session handling is outside this repository. Accept Valve's Workshop legal agreement on Steam if prompted, then verify the item's files and hidden visibility manually. A successful exit code alone is insufficient evidence of acceptance.
 
-SteamCMD writes `publishedfileid` back into `item.vdf`. The script preserves it in `.local/workshop/state.json` and recovers it from VDF before any regeneration. Back up **both files** securely; neither contains a password. Keep item identity across clones/machines by restoring this state before preparing another upload. Once an ID exists the script updates it and refuses `-NewItem`.
+SteamCMD writes `publishedfileid` back into `item.vdf`. The script preserves it in `.local/workshop/state.json` and recovers it from VDF before any regeneration. Back up **both files** securely; neither contains a password. This project also commits its non-sensitive App ID and item ID in workshop/item.json. Fresh clones use that tracked identity even without local state; conflicting IDs are rejected. Once an ID exists the script updates it and refuses `-NewItem`.
 
 If creation is interrupted and no ID was saved, an upload-pending marker blocks another creation. Inspect the account's Workshop items and SteamCMD output, recover the existing ID into state.json (format below), and only then retry. If no item was created, verify that manually before removing the marker. Never assume a failed process means Steam created nothing.
 
@@ -48,3 +48,9 @@ If creation is interrupted and no ID was saved, an upload-pending marker blocks 
 After testing a new version, update changelog/version, commit, tag, publish the authorized GitHub Release, then run the same upload command **without `-NewItem`**. Changenote is generated from that version's changelog. This script always keeps the item hidden, including updates; it has no public setting. If the item is later intentionally made public, using this script hides it again until you explicitly change visibility on Steam. This conservative behavior must be considered when planning public updates.
 
 **Changing an item to public requires separate explicit owner authorization and a manual visibility change on Steam.** The first hidden upload was authorized on 2026-11-11; actual upload results and item identity are recorded in agent.md and ignored .local/workshop state.
+
+## Current delivery record
+
+- [Public GitHub Release v0.1.1](https://github.com/fuliez/ProbablyStolen-DragAwareHotkeys/releases/tag/v0.1.1) is published with runtime ZIP and checksum file.
+- First hidden Workshop upload completed: item 3837800051, app 4348910, submitted visibility 2. Local result and returned VDF confirm success and saved identity. Owner-authenticated page/Workshop agreement verification is still required; anonymous queries cannot view this hidden item.
+- Public Workshop visibility is not authorized. Updating through this script retains hidden visibility.

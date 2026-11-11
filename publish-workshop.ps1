@@ -14,15 +14,25 @@ New-Item -ItemType Directory -Force $work | Out-Null
 $vdf = Join-Path $work 'item.vdf'
 $statePath = Join-Path $work 'state.json'
 $itemId = '0'
+$identityPath = Join-Path $ProjectRoot 'workshop/item.json'
+if (Test-Path -LiteralPath $identityPath) {
+    $identity = Get-Content -LiteralPath $identityPath -Raw -Encoding utf8 | ConvertFrom-Json
+    if ([string]$identity.appid -ne '4348910' -or [string]$identity.publishedfileid -notmatch '^[1-9][0-9]*$') {
+        throw 'Invalid tracked Workshop identity. Restore workshop/item.json before continuing.'
+    }
+    $itemId = [string]$identity.publishedfileid
+}
 if (Test-Path -LiteralPath $statePath) {
-    $state = Get-Content -LiteralPath $statePath -Raw | ConvertFrom-Json
-    $itemId = [string]$state.publishedfileid
-    if ($itemId -notmatch '^[1-9][0-9]*$') { throw 'Invalid saved Workshop ID; recover it from Steam before continuing.' }
+    $state = Get-Content -LiteralPath $statePath -Raw -Encoding utf8 | ConvertFrom-Json
+    $savedId = [string]$state.publishedfileid
+    if ($savedId -notmatch '^[1-9][0-9]*$') { throw 'Invalid saved Workshop ID; recover it from Steam before continuing.' }
+    if ($itemId -ne '0' -and $itemId -ne $savedId) { throw 'Saved Workshop ID conflicts with tracked identity; resolve it before uploading.' }
+    $itemId = $savedId
 }
 # SteamCMD writes its ID into this file. Recover it before regenerating anything,
 # even if a prior upload exited unsuccessfully or the process was interrupted.
 if (Test-Path -LiteralPath $vdf) {
-    $previous = Get-Content -LiteralPath $vdf -Raw
+    $previous = Get-Content -LiteralPath $vdf -Raw -Encoding utf8
     $match = [regex]::Match($previous, '"publishedfileid"\s+"([1-9][0-9]*)"')
     if ($match.Success) {
         $recovered = $match.Groups[1].Value
@@ -50,18 +60,19 @@ if ($Upload) {
 & "$PSScriptRoot/package.ps1" -GameDir $GameDir
 $content = Join-Path $ProjectRoot 'artifacts/Release/drag_aware_hotkeys'
 $version = Get-ModVersion
-$changelog = Get-Content (Join-Path $ProjectRoot 'CHANGELOG.md') -Raw
+$changelog = Get-Content (Join-Path $ProjectRoot 'CHANGELOG.md') -Raw -Encoding utf8
 $release = [regex]::Match($changelog, '(?ms)^## \[' + [regex]::Escape($version) + '\][^\r\n]*\r?\n(.*?)(?=^## \[|\z)')
 if (!$release.Success) { throw "CHANGELOG has no entry for $version." }
 $note = "v$version`n" + $release.Groups[1].Value.Trim()
-$description = (Get-Content (Join-Path $ProjectRoot 'workshop/description.en.txt') -Raw).Trim() + "`n`n" + (Get-Content (Join-Path $ProjectRoot 'workshop/description.zh-CN.txt') -Raw).Trim()
+$description = (Get-Content (Join-Path $ProjectRoot 'workshop/description.en.txt') -Raw -Encoding utf8).Trim() + "`n`n" + (Get-Content (Join-Path $ProjectRoot 'workshop/description.zh-CN.txt') -Raw -Encoding utf8).Trim()
+[xml]$manifest = Get-Content (Join-Path $ProjectRoot 'mod/manifest.xml') -Raw -Encoding utf8
 function Escape-Vdf([string]$Value) { return $Value.Replace('\', '\\').Replace('"', '\"').Replace("`r", '').Replace("`n", '\n') }
 $fields = [ordered]@{
     appid = '4348910'
     publishedfileid = $itemId
     contentfolder = $content
     visibility = '2'
-    title = 'Drag-Aware Hotkeys（解决拖拽时按键冲突）'
+    title = [string]$manifest.Manifest.Name
     description = $description
     changenote = $note
 }
@@ -78,7 +89,7 @@ try {
     & $SteamCmdPath '+login' $SteamUser '+workshop_build_item' $vdf '+quit'
     $steamExitCode = $LASTEXITCODE
 } finally { Pop-Location }
-$updated = [regex]::Match((Get-Content -LiteralPath $vdf -Raw), '"publishedfileid"\s+"([1-9][0-9]*)"')
+$updated = [regex]::Match((Get-Content -LiteralPath $vdf -Raw -Encoding utf8), '"publishedfileid"\s+"([1-9][0-9]*)"')
 if ($updated.Success) {
     $returnedId = $updated.Groups[1].Value
     if ($itemId -ne '0' -and $itemId -ne $returnedId) { throw 'Steam returned a different ID; inspect item.vdf before continuing.' }

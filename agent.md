@@ -62,3 +62,14 @@ Read AGENTS.md before editing; do not include local absolute paths or private lo
 
 - Installed the Release 0.1.1 DLL and corrected manifest into this mod's Mods/drag_aware_hotkeys folder after the game exited. Original game DLL fingerprint remains unchanged. Updated Mods-menu display still needs the owner's quick visual confirmation.
 - Created the authorized public repository https://github.com/fuliez/ProbablyStolen-DragAwareHotkeys using authenticated GitHub CLI (the connector lacks repository-creation capability). Local origin configured. Git push and CI verification follow this release commit. Steam login opened in a local interactive window; no password/Guard code stored by the project.
+
+## Delivery status — 2026-11-11
+
+- Public GitHub repository: https://github.com/fuliez/ProbablyStolen-DragAwareHotkeys . main and annotated v0.1.1 pushed; tag/main initial Actions runs passed (43007272811 and 43007273949).
+- The owner explicitly authorized public GitHub Release after reviewing the prepared draft. Published https://github.com/fuliez/ProbablyStolen-DragAwareHotkeys/releases/tag/v0.1.1 with runtime ZIP and SHA256SUMS.txt. Downloaded assets and verified ZIP checksum.
+- Tag v0.1.1 contains the released runtime source. Subsequent main commits improve release tooling and documentation only; do not move the published tag. No runtime behavior/version changes are needed for these tooling-only fixes.
+- First interactive upload attempt stopped before SteamCMD due to Windows PowerShell 5.1 decoding the manifest as ANSI. No upload marker was created, so a duplicate item could not have been created by that failed preparation. Fixed explicit UTF-8 reads in shared helpers and publisher; verified full preparation under 5.1 and offline tests under both shells. CI now covers 5.1 metadata too.
+- The authorized first hidden upload completed successfully. SteamCMD returned publishedfileid **3837800051**; .local/workshop/upload-result.json reports finished. The returned VDF retains appid 4348910, visibility 2 and the correct bilingual title. Public Workshop visibility remains unauthorized. The anonymous metadata API returns result 9 (not accessible), so owner-authenticated page verification/legal agreement remains a separate check.
+
+- Workshop identity is now tracked in workshop/item.json (App ID and item ID only; no local paths or login state). Publisher prefers this identity, rejects conflicting local IDs and refuses NewItem for this project, even in a fresh clone. First-creation, recovery, fresh-clone and conflicting-state tests pass under PowerShell 7 and 5.1. Future updates must omit -NewItem.
+- Workshop owner page: https://steamcommunity.com/sharedfiles/filedetails/?id=3837800051 . Await the owner's confirmation of cover/title/hidden state and any required Workshop legal agreement. Do not change visibility to public without explicit authorization.
