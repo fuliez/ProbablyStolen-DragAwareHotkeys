@@ -6,6 +6,14 @@ All notable changes are recorded here. Versions follow Semantic Versioning.
 
 - No changes yet.
 
+## [0.1.5] - 2026-11-11
+
+### Changed
+
+- Set the in-game mod author to fuliezi and align current README credits, copyright, assembly/package metadata and artwork attribution.
+- Provide equivalent Chinese-first and English-second in-game descriptions, separated by a blank line.
+- Input behavior and the verified public-game compatibility declaration are unchanged.
+
 ## [0.1.4] - 2026-11-11
 
 ### Fixed

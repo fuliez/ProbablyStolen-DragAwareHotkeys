@@ -2,9 +2,11 @@
 <Manifest>
   <ID>drag_aware_hotkeys</ID>
   <Name>Drag-Aware Hotkeys_解决拖拽时按键冲突</Name>
-  <Author>ProbablyStolen-DragAwareHotkeys contributors</Author>
-  <ModVersion>0.1.4</ModVersion>
-  <Description>Block Storage Coordinator hotkeys while dragging items. Keep rotation and normal storage shortcuts.</Description>
+  <Author>fuliezi</Author>
+  <ModVersion>0.1.5</ModVersion>
+  <Description>拖动物品时屏蔽储物协调器快捷键。保留物品旋转，以及未拖拽物品时的正常储物快捷键。
+
+Block Storage Coordinator hotkeys while dragging items. Keep item rotation and normal storage shortcuts when not dragging.</Description>
   <GameVersions>
     <!-- Tested public release: 100-Rev13 (1.0.0.13), build 26525552.
          This build's Mods menu matches the legacy Application.version below. -->

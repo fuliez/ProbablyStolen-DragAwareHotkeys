@@ -8,7 +8,7 @@ Create the open-source project **ProbablyStolen-DragAwareHotkeys** inside `my_mo
 
 ## Completed implementation
 
-- Independent Git repository on main. MIT license, bilingual documentation, SemVer 0.1.4, changelog, Codex rules and CI. GitHub delivery status is recorded below.
+- Independent Git repository on main. MIT license, bilingual documentation, SemVer 0.1.5, changelog, Codex rules and CI. GitHub delivery status is recorded below.
 - Native IMod entry; one automatic Harmony prefix on private static `MachineStorageCoordinator.HandleHotkeys`. Checks public `ItemMouseDragHandler.current.IsDraggingItem` with Unity null comparison. No native cancellation hook exists in inspected build. All actual API evidence is in docs/API-INVESTIGATION.md.
 - Enabled flag, Release lifecycle logs, Debug drag-transition logs, fail-open state-read exception handling with once-per-enable warning. No file/save/network APIs in runtime DLL, empty capabilities.
 - Root build/install/package/publish-workshop PowerShell scripts. Configuration via parameter/env/ignored JSON. Exact DLL + manifest packaging. Upload defaults to preparation; explicit confirmation matching Hidden/Public visibility is required. Preserves/recover Workshop ID, refuses duplicate creation after uncertain upload.
@@ -125,3 +125,11 @@ Read AGENTS.md before editing; do not include local absolute paths or private lo
 - 0.1.4 Release build, actual-game API/scanner, exact normalized 0.46D match, offline publishing and README link/command parity checks passed. Manifest has exactly one GameVersions entry: 0.46D. Installed with game closed and packaged; current user screenshot independently confirms that legacy identifier is green in the installed menu. Old 1.1.0 references above are historical errors, not support claims.
 
 - Published GitHub Release v0.1.4 and updated the same PUBLIC Workshop item 3837800051; upload finished at 2026-11-11T11:36:01Z. Anonymous metadata confirms visibility=0 and the new 0.1.4 / 100-Rev13 / build 26525552 statement. Source, package and installed manifest bytes agree and declare only 0.46D. Added factual-correction notices to 0.1.1–0.1.3 release notes while preserving their original assets and tags.
+
+## Author credit and in-game bilingual description — 2026-11-11
+
+- Owner requested exact author label fuliezi instead of the project/contributors placeholder, and equivalent Chinese above English in the game's Mod description.
+- Metadata-only 0.1.5: manifest author, README author rows, LICENSE copyright, assembly/package author/company/copyright metadata and artwork attribution now use fuliezi. Workshop description bylines use the same label. Existing GitHub repository owner fuliez and all repository URLs are unchanged; no Git history rewriting.
+- Manifest Description uses actual Chinese text followed by a blank line and equivalent English text. Installed loader reads the XML value and trims only outer whitespace, preserving the line break. No UI patch is needed. Runtime input source and GameVersions=0.46D remain unchanged.
+
+- 0.1.5 checks passed: Release build, actual-game API/scanner and 0.46D normalization, repository/script checks, parsed XML author/description ordering and source/package/installed manifest byte equality. Bilingual README commands remain identical. Installed while the game was closed. Actual restarted menu rendering remains pending owner observation.

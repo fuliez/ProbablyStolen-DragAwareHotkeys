@@ -17,3 +17,5 @@ Read `agent.md`, README.md, docs/API-INVESTIGATION.md and docs/TESTING.md before
 - Update `agent.md` with implementation decisions, validations, failures and open work so another AI can continue. Do not replace pending status with inferred success.
 - README.md is the Chinese default; README.en.md must contain the same sections, commands and facts. Keep the local language-switch buttons in both. Workshop's Source section links only the repository; downloads and feedback use Steam.
 - The owner authorized public visibility for existing Workshop item 3837800051 on 2026-11-11. Preserve that tracked visibility for updates, require matching explicit upload confirmation, and never create a replacement item. First creation in a new independent project must still be hidden.
+
+- Mod author/display credit is exactly fuliezi. Keep manifest, current README credits, copyright and assembly/package metadata aligned. GitHub repository owner remains fuliez; do not rewrite repository URLs or Git history to match the display author. In-game manifest Description must contain equivalent Chinese first, then English, separated by a real blank line.

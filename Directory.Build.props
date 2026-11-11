@@ -1,6 +1,9 @@
 <Project>
   <PropertyGroup>
-    <Version>0.1.4</Version>
+    <Version>0.1.5</Version>
+    <Authors>fuliezi</Authors>
+    <Company>fuliezi</Company>
+    <Copyright>Copyright (c) 2026 fuliezi</Copyright>
     <LangVersion>10.0</LangVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>disable</ImplicitUsings>

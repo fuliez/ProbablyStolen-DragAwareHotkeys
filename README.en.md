@@ -6,7 +6,8 @@ A lightweight mod for *Probably Stolen*: suppress Storage Coordinator container 
 
 | Item | Status |
 | --- | --- |
-| Mod version | **0.1.4** |
+| Mod version | **0.1.5** |
+| Author | **fuliezi** |
 | Tested game | Public **100-Rev13 / 1.0.0.13**, build **26525552** |
 | Menu compatibility identifier | **0.46D** (the legacy runtime version retained by this public build) |
 | Acceptance | The owner completed official-game acceptance with no obvious issues reported |
