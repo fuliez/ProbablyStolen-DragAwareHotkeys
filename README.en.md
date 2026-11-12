@@ -33,7 +33,7 @@ Disable and restart to restore vanilla behavior. To uninstall, unsubscribe or cl
 
 Requires Windows PowerShell 5.1+ or PowerShell 7+, Git, a .NET SDK supporting C# 10 / netstandard2.1, and a legally installed full game. CI pins SDK 6.0.410; .NET 6 is out of support, so future maintenance should consider upgrading the development SDK. The runtime mod still targets the game's netstandard2.1 contract.
 
-Set the game path from the project root (this example assumes the repository is in the game's `my_mod` subdirectory), then run:
+Set the game path from the project root (this example assumes the repository is in the game's `Drag-Aware-Hotkeys` subdirectory), then run:
 
 ```powershell
 $env:PROBABLY_STOLEN_GAME_DIR = (Resolve-Path '..').Path

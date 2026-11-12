@@ -33,7 +33,7 @@
 
 需要 Windows PowerShell 5.1+ 或 PowerShell 7+、Git、支持 C# 10 / netstandard2.1 的 .NET SDK，以及合法安装的完整版游戏。CI 固定使用 SDK 6.0.410；.NET 6 已停止支持，后续维护应考虑升级开发 SDK。Mod 运行目标仍为游戏使用的 netstandard2.1。
 
-在项目根目录设置游戏路径（以下示例适用于仓库位于游戏的 `my_mod` 子目录），然后执行：
+在项目根目录设置游戏路径（以下示例适用于仓库位于游戏的 `Drag-Aware-Hotkeys` 子目录），然后执行：
 
 ```powershell
 $env:PROBABLY_STOLEN_GAME_DIR = (Resolve-Path '..').Path

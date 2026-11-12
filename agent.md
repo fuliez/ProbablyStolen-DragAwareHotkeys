@@ -1,6 +1,14 @@
 # AI handoff / 开发记录
 
-Last updated: 2026-11-11 (Asia/Singapore).
+Last updated: 2026-11-12 (Asia/Singapore).
+
+## Current local project folder — 2026-11-12
+
+- At the owner's request, renamed only this development directory from `my_mod` to `Drag-Aware-Hotkeys`, beside the game executable. Historical entries below retain the old directory name as history. The independent ascetic project and developer guide folder were not renamed.
+- Updated both README build examples, ignored local SteamCMD configuration in this project and the ascetic project, and the existing local Workshop VDF's content/cover paths. SteamCMD remains in this project's ignored `.local/steamcmd` folder. Workshop item 3837800051 is unchanged.
+- Windows initially denied the rename while VS Code held this repository's `.git` directory. The owner closed Git repository monitoring through Git: Close Repository; the rename then succeeded without closing the editor window.
+- Validation from the renamed root: Release Rebuild (zero warnings/errors), script/repository checks, actual-game API/version/scanner checks all passed. Scanner: 14 methods, no refusals/capabilities/hard flags/errors. Rebuilt DLL SHA256 is unchanged: 09A8E5D89C55C56398D104EC7F246700435D0AD4999F37A633664C0C4C4ACE8F.
+- This is local folder/configuration/documentation maintenance. No runtime source, Mod ID, installed Mods directory, version, repository remote, published tag or Workshop content changed. No upload or save operation was performed.
 
 ## User intent and boundaries
 
